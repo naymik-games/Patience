@@ -56,7 +56,7 @@ class playGame extends Phaser.Scene {
     console.log(frame)
     var cutWidth = frame.cutWidth
     var cutHeight = frame.cutHeight
-    this.cameras.main.setBackgroundColor(0x077837);
+    this.cameras.main.setBackgroundColor(bgColors[onColor]);
 
     this.cardSpacing = 15;
     this.cardSpacingY = 15;
@@ -203,7 +203,7 @@ class playGame extends Phaser.Scene {
       if (this.selection.length === 0) {
         if (card.place == 'cell') { return }
         //check if card can go to foundation
-        if (this.checkFoundation(card.suitNum, card.value) && this.isTopCard(card)) {
+        if (this.checkFoundation(card.suitNum, card.value, card) && this.isTopCard(card)) {
           gameRules.moveToFoundation(card)
           return
         }
@@ -275,16 +275,27 @@ class playGame extends Phaser.Scene {
     }
     console.log(this.selection)
   }
-  checkFoundation(num, value) {
+  // foundation[num][foundation[num].length - 1].suitNum == num && foundation[num][foundation[num].length - 1].value + 1 == value
+  checkFoundation(num, value, from) {
     if (foundation[num].length == 0) {
       if (value == gameRules.foundationValue) {
         return true;
       }
-    } else if (foundation[num][foundation[num].length - 1].suitNum == num && foundation[num][foundation[num].length - 1].value + 1 == value) {
+    } else if (this.checkSequenceFound(from, foundation[num][foundation[num].length - 1])) {
       return true;
     } else {
       return false;
     }
+  }
+  checkSequenceFound(from, to) {
+    if (from.value - 1 == to.value && from.suitNum == to.suitNum) {
+      return true
+    }
+    if (to.value == 13 && from.value == 1 && from.suitNum == to.suitNum) {
+      return true
+    }
+    return false
+
   }
   isTopCard(card) {
     if (card.place == 'waste') {

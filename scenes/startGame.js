@@ -8,13 +8,14 @@ class startGame extends Phaser.Scene {
 
   }
   create() {
-    /*
-      gameSettings = JSON.parse(localStorage.getItem('SDsave'));
-      if (gameSettings === null || gameSettings.length <= 0) {
-        localStorage.setItem('SDsave', JSON.stringify(defaultValues));
-        gameSettings = defaultValues;
-      }
-    */
+
+    gameSettings = JSON.parse(localStorage.getItem('Patience'));
+    if (gameSettings === null || gameSettings.length <= 0) {
+      localStorage.setItem('Patience', JSON.stringify(defaultSettings));
+      gameSettings = defaultSettings;
+    }
+    onDeck = gameSettings.deckNum
+    onColor = gameSettings.color
     this.cameras.main.setBackgroundColor(0x077837);
 
     var title = this.add.bitmapText(game.config.width / 2, 100, 'topaz', 'PATIENCE', 150).setOrigin(.5).setTint(0xcbf7ff);
@@ -23,7 +24,41 @@ class startGame extends Phaser.Scene {
       startTime.setInteractive();
       startTime.on('pointerdown', this.clickHandler, this);
    */
+    var deck = this.add.image(225, 350, decks[onDeck].key, 12).setInteractive()
+    deck.displayWidth = 150
+    deck.scaleY = deck.scaleX
+    deck.on('pointerdown', function () {
+      onDeck++
 
+      if (onDeck == decks.length) {
+        onDeck = 0
+      }
+      deck.setTexture(decks[onDeck].key, 12)
+      deck.displayWidth = 150
+      deck.scaleY = deck.scaleX
+      gameSettings.deckNum = onDeck
+      localStorage.setItem('Patience', JSON.stringify(gameSettings));
+    }, this)
+
+    var backBack = this.add.image(675, 350, 'blank').setTint(0xcbf7ff).setInteractive()
+    backBack.displayWidth = 150
+    backBack.displayHeight = deck.displayHeight
+
+
+    var back = this.add.image(675, 350, 'blank').setTint(bgColors[onColor]).setInteractive()
+    back.displayWidth = backBack.displayWidth - 20
+    back.displayHeight = backBack.displayHeight - 20
+    back.on('pointerdown', function () {
+      onColor++
+
+      if (onColor == bgColors.length) {
+        onColor = 0
+      }
+      back.setTint(bgColors[onColor])
+
+      gameSettings.color = onColor
+      localStorage.setItem('Patience', JSON.stringify(gameSettings));
+    }, this)
 
 
     for (var g = 0; g < games.length; g++) {
@@ -53,7 +88,7 @@ class startGame extends Phaser.Scene {
     this.scene.launch('UI');
   }
   click(e, obj) {
-    console.log(obj.num)
+
     if (obj.name) {
 
 

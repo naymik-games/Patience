@@ -10,17 +10,10 @@ let gameOptions = {
 
 
 }
-
-
-let gameSettings;
-var defaultValues = {
-  mostDotsMoves: 0,
-  mostDotsTime: 0,
-  levelStatus: [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-  totalSquares: 0,
-  group: 0,
-  currentLevel: 0
-}
+let gameSettings
+let bgColors = [0x077837, 0x000000, 0x993300, 0x0033cc, 0xf7eac6, 0x333333, 0x488a81]
+let defaultSettings = { deckNum: 0, sound: false, color: 0, back: 0 };
+let onColor = 0
 let cardKey
 let onDeck = 2
 let decks = [
@@ -35,6 +28,10 @@ let decks = [
   {
     key: 'cards_sixty_2',
     name: 'Sixties'
+  },
+  {
+    key: 'cards_simple',
+    name: 'Simple Dark'
   }
 ]
 let onGame = 1

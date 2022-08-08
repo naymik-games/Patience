@@ -223,7 +223,7 @@ class Klondike {
   }
   checkWin() {
     for (var f = 0; f < this.foundation.num; f++) {
-      if (foundation[f].length < 12) {
+      if (foundation[f].length < 13) {
         return
       }
     }
