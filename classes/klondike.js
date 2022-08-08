@@ -7,9 +7,12 @@ class Klondike {
     this.foundation = { num: 4, col: 3, row: 0, build: 'aceUp' }
     this.tableau = { num: 7, col: 0, row: 1, build: 'colorAlt' }
     this.free = null
+    this.reserve = null
     this.allowRedeal = true
     this.allowMult = true
     this.moveKingEmpty = true
+    this.showFoundationLabel = false
+    this.foundationValue = 1
     this.draw = 3
     this.yOffset = 200
     this.redealMax = 200
@@ -129,10 +132,12 @@ class Klondike {
     if ((this.scene.selection[0].value + 1 == toCard.value && this.scene.selection[0].color != toCard.color) || this.scene.selection[0].value == 13) {
 
       var fromStack
+      var fromPlace
       for (var i = 0; i < this.scene.selection.length; i++) {
         var from = this.scene.selection[i];
         from.clearTint()
         fromStack = from.stack
+        fromPlace = from.place
         if (from.place == 'tableau') {
           tableau[from.stack].pop()
         } else if (from.place == 'waste') {
@@ -159,7 +164,7 @@ class Klondike {
 
 
       }
-      this.scene.flipStack(fromStack)
+      this.scene.flipStack(fromStack, fromPlace)
       /*  if (tableau[fromStack][tableau[fromStack].length - 1].faceDown) {
          tableau[fromStack][tableau[fromStack].length - 1].flip('f')
        } */
@@ -175,7 +180,7 @@ class Klondike {
     if (card.place == 'tableau') {
       tableau[card.stack].pop();
       card.place = 'foundation'
-      this.scene.flipStack(card.stack)
+      this.scene.flipStack(card.stack, 'tableau')
     } else if (card.place == 'waste') {
       waste.pop();
       card.place = 'foundation'
@@ -190,14 +195,19 @@ class Klondike {
       targets: card,
       x: foundPositions[card.suitNum].x,
       y: foundPositions[card.suitNum].y,
-      duration: 200
+      duration: 200,
+      onCompleteScope: this,
+      onComplete: function () {
+        this.checkWin()
+      }
     })
   }
+
   moveToEmptyStack(card, stack) {
     if (card.place == 'tableau') {
       tableau[card.stack].pop();
       card.place = 'tableau'
-      this.scene.flipStack(card.stack)
+      this.scene.flipStack(card.stack, card.place)
     } else if (card.place == 'waste') {
       waste.pop();
       card.place = 'tableau'
@@ -210,5 +220,16 @@ class Klondike {
       y: tabPositions[stack].y,
       duration: 200
     })
+  }
+  checkWin() {
+    for (var f = 0; f < this.foundation.num; f++) {
+      if (foundation[f].length < 12) {
+        return
+      }
+    }
+    //gameData[currentGameNum].wins++;
+    //this.saveData();
+
+    alert('win!')
   }
 }

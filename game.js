@@ -12,6 +12,8 @@ let foundation
 let foundPositions
 let cells
 let freePositions
+let reserve
+let reservePosition
 window.onload = function () {
   let gameConfig = {
     type: Phaser.AUTO,
@@ -46,6 +48,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Klondike(this)
     } else if (onGame == 1) {
       gameRules = new Yukon(this)
+    } else if (onGame == 2) {
+      gameRules = new Canfield(this)
     }
     cardKey = decks[onDeck].key
     var frame = this.textures.getFrame(cardKey, 0);
@@ -55,15 +59,26 @@ class playGame extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x077837);
 
     this.cardSpacing = 15;
+    this.cardSpacingY = 15;
 
     this.cardBlank = 62;
     var cols = gameRules.totalCols;
     var cardSpace = game.config.width - (this.cardSpacing * (cols + 1))
     var s = (cardSpace / cols) / cutWidth
+    console.log(s)
     this.scale = s;
     this.cardWidth = cutWidth * this.scale;
     this.cardHeight = cutHeight * this.scale;
+    //RESERVE//////////////////////////////////////////////
+    if (gameRules.reserve) {
+      var x = this.cardSpacing + this.cardWidth / 2 + gameRules.reserve.col * (this.cardWidth + this.cardSpacing)
+      var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.reserve.row * (this.cardHeight + this.cardSpacingY)
+      this.reservePile = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(0).setAlpha(.5);
+      this.reservePile.place = 'reservePile'
+      reserve = []
+      reservePosition = { x: x, y: y }
 
+    }
     //FREE CELLS/////////////////////////////////////////
     if (gameRules.free) {
       cells = []
@@ -71,7 +86,7 @@ class playGame extends Phaser.Scene {
       var count = 0
       for (var f = gameRules.free.col; f < gameRules.free.col + gameRules.free.num; f++) {
         var x = this.cardSpacing + this.cardWidth / 2 + f * (this.cardWidth + this.cardSpacing)
-        var y = (gameRules.yOffset + this.cardSpacing) + gameRules.free.row * 190
+        var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.free.row * (this.cardHeight + this.cardSpacingY)
         freePositions.push({ x: x, y: y })
         var free = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(1).setAlpha(.5).setInteractive();
         free.place = 'cell'
@@ -92,9 +107,9 @@ class playGame extends Phaser.Scene {
         foundPositions = []
         for (var f = gameRules.foundation.col; f < gameRules.foundation.col + gameRules.foundation.num; f++) {
           var x = this.cardSpacing + this.cardWidth / 2 + f * (this.cardWidth + this.cardSpacing)
-          var y = (gameRules.yOffset + this.cardSpacing) + gameRules.foundation.row * 190
+          var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.foundation.row * (this.cardHeight + this.cardSpacingY)
           foundPositions.push({ x: x, y: y })
-          var found = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(1).setAlpha(.5);
+          var found = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(0).setAlpha(.5);
           foundation.push(new Array())
         }
         //arrays
@@ -103,7 +118,13 @@ class playGame extends Phaser.Scene {
       } else {
         //code if game only has one foundation
       }
+      if (gameRules.showFoundationLabel) {
+        this.rTextC = this.add.bitmapText(foundPositions[0].x, foundPositions[0].y, 'topaz', '5', 100).setOrigin(.5).setTint(0xffffff);
+        this.rTextD = this.add.bitmapText(foundPositions[1].x, foundPositions[1].y, 'topaz', '10', 100).setOrigin(.5).setTint(0xffffff);
+        this.rTextH = this.add.bitmapText(foundPositions[2].x, foundPositions[2].y, 'topaz', 'J', 100).setOrigin(.5).setTint(0xffffff);
+        this.rTextS = this.add.bitmapText(foundPositions[3].x, foundPositions[3].y, 'topaz', '2', 100).setOrigin(.5).setTint(0xffffff);
 
+      }
 
     }
     //TABLEAU///////////////////////////////////////////////////////
@@ -112,7 +133,7 @@ class playGame extends Phaser.Scene {
       tabPositions = []
       for (var t = gameRules.tableau.col; t < gameRules.tableau.col + gameRules.tableau.num; t++) {
         var x = this.cardSpacing + this.cardWidth / 2 + t * (this.cardWidth + this.cardSpacing)
-        var y = (gameRules.yOffset + this.cardSpacing) + gameRules.tableau.row * 190
+        var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.tableau.row * (this.cardHeight + this.cardSpacingY)
         tabPositions.push({ x: x, y: y })
         var tab = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setInteractive().setDepth(0).setAlpha(.5);
         tableau.push(new Array())
@@ -124,7 +145,7 @@ class playGame extends Phaser.Scene {
     //STOCK/////////////////////////////////////////////////
     if (gameRules.stock) {
       var x = this.cardSpacing + this.cardWidth / 2 + gameRules.stock.col * (this.cardWidth + this.cardSpacing)
-      var y = (gameRules.yOffset + this.cardSpacing) + gameRules.stock.row * 190
+      var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.stock.row * (this.cardHeight + this.cardSpacingY)
       this.drawPile = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(0).setAlpha(.5);
       this.drawPile.place = 'drawPile'
       stock = []
@@ -133,7 +154,7 @@ class playGame extends Phaser.Scene {
     //WASTE /////////////////////////////////////////////////
     if (gameRules.waste) {
       var x = this.cardSpacing + this.cardWidth / 2 + gameRules.waste.col * (this.cardWidth + this.cardSpacing)
-      var y = (gameRules.yOffset + this.cardSpacing) + gameRules.waste.row * 190
+      var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.waste.row * (this.cardHeight + this.cardSpacingY)
       this.wastePile = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(1).setAlpha(.5);
       this.wastePile.place = 'wastePile'
       waste = []
@@ -177,7 +198,7 @@ class playGame extends Phaser.Scene {
 
       gameRules.drawStock()
     }
-    if (!card.faceDown && (card.place == 'tableau' || card.place == 'waste' || card.place == 'cell' || card.place == 'free')) {
+    if (!card.faceDown && (card.place == 'tableau' || card.place == 'waste' || card.place == 'cell' || card.place == 'free' || card.place == 'reserve')) {
       //FIRST CLICK
       if (this.selection.length === 0) {
         if (card.place == 'cell') { return }
@@ -200,7 +221,15 @@ class playGame extends Phaser.Scene {
           if (card.value == 13 && gameRules.moveKingEmpty) {
             var temp = this.findEmptyStack();
             if (temp > -1) {
-              var toCard = { place: 'tableau', stack: temp, value: -1 }
+              var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }
+              gameRules.moveSelected(toCard);
+
+            }
+            return
+          } else if (!gameRules.moveKingEmpty) {
+            var temp = this.findEmptyStack();
+            if (temp > -1) {
+              var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }
               gameRules.moveSelected(toCard);
 
             }
@@ -213,7 +242,16 @@ class playGame extends Phaser.Scene {
           if (card.value == 13 && gameRules.moveKingEmpty) {
             var temp = this.findEmptyStack();
             if (temp > -1) {
-              var toCard = { place: 'tableau', stack: temp, value: -1 }
+              var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }
+              gameRules.moveSelected(toCard);
+
+            }
+            return
+          } else if (!gameRules.moveKingEmpty) {
+            console.log('finding empty spot')
+            var temp = this.findEmptyStack();
+            if (temp > -1) {
+              var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }
               gameRules.moveSelected(toCard);
 
             }
@@ -239,7 +277,7 @@ class playGame extends Phaser.Scene {
   }
   checkFoundation(num, value) {
     if (foundation[num].length == 0) {
-      if (value == 1) {
+      if (value == gameRules.foundationValue) {
         return true;
       }
     } else if (foundation[num][foundation[num].length - 1].suitNum == num && foundation[num][foundation[num].length - 1].value + 1 == value) {
@@ -264,19 +302,38 @@ class playGame extends Phaser.Scene {
       if (index == cells[card.stack].length - 1) {
         return true
       }
+    } else if (card.place == 'reserve') {
+      var index = reserve.findIndex(x => x.index === card.index);
+      if (index == reserve.length - 1) {
+        return true
+      }
     }
   }
-  flipStack(stack) {
+  flipStack(stack, place) {
+    console.log(place)
     if (stack == -1) {
       return
     }
-    if (tableau[stack].length > 0) {
-      var card = tableau[stack][tableau[stack].length - 1];
-      if (card.faceDown) {
-        card.flip('f')
-      }
+    if (place == 'tableau') {
+      if (tableau[stack].length > 0) {
+        var card = tableau[stack][tableau[stack].length - 1];
+        if (card.faceDown) {
+          card.flip('f')
+        }
 
+      }
+    } else if (place == 'reserve') {
+      console.log(reserve.length)
+      if (reserve.length > 0) {
+        var card = reserve[reserve.length - 1];
+        console.log(card.faceDown)
+        if (card.faceDown) {
+          card.flip('f')
+        }
+
+      }
     }
+
   }
   findEmptyStack() {
     var stack = -1;

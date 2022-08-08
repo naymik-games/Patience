@@ -7,13 +7,14 @@
   }
 } */
 class Card extends Phaser.GameObjects.Image {
-  constructor(scene, x, y, texture, frame, suit, suitNum, rank, value, index, scale, color) {
+  constructor(scene, x, y, texture, frame, suit, suitNum, rank, rankShort, value, index, scale, color) {
     super(scene, x, y, texture, frame, suit, rank, value, index, scale, color);
     // ...
     scene.add.existing(this);
     this.suit = suit;
     this.suitNum = suitNum
     this.rank = rank;
+    this.rankShort = rankShort;
     this.value = value;
     this.index = index
     this.color = color
@@ -80,6 +81,7 @@ class Deck {
   createDeck(scale) {
     let suits = ['clubs', 'diamonds', 'hearts', 'spades'];
     let ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king'];
+    let ranksShort = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
     let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     var f = 0
     for (let i = 0; i < suits.length; i++) {
@@ -89,7 +91,7 @@ class Deck {
         } else {
           var color = 'red';
         }
-        this.cards.push(new Card(this.scene, game.config.width / 2, game.config.height / 2 + 300, cardKey, 52, suits[i], i, ranks[j], values[j], f, scale, color));
+        this.cards.push(new Card(this.scene, game.config.width / 2, game.config.height / 2 + 300, cardKey, 52, suits[i], i, ranks[j], ranksShort[j], values[j], f, scale, color));
 
         f++
       }
