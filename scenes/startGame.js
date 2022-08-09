@@ -25,7 +25,8 @@ class startGame extends Phaser.Scene {
       startTime.setInteractive();
       startTime.on('pointerdown', this.clickHandler, this);
    */
-    var deck = this.add.image(225, 350, decks[onDeck].key, 12).setInteractive()
+    var deckLabel = this.add.bitmapText(200, 250, 'topaz', 'Deck Face', 35).setOrigin(.5).setTint(0xffffff);
+    var deck = this.add.image(200, 400, decks[onDeck].key, 12).setInteractive()
     deck.displayWidth = 150
     deck.scaleY = deck.scaleX
     deck.on('pointerdown', function () {
@@ -42,8 +43,8 @@ class startGame extends Phaser.Scene {
     }, this)
 
 
-
-    var deckBack = this.add.image(450, 350, 'backs', onBack).setInteractive()
+    var backLabel = this.add.bitmapText(450, 250, 'topaz', 'Deck Back', 35).setOrigin(.5).setTint(0xffffff);
+    var deckBack = this.add.image(450, 400, 'backs', onBack).setInteractive()
     deckBack.displayWidth = 150
     deckBack.displayHeight = deck.displayHeight
     deckBack.on('pointerdown', function () {
@@ -59,13 +60,13 @@ class startGame extends Phaser.Scene {
 
 
 
-
-    var backBack = this.add.image(675, 350, 'blank').setTint(0xcbf7ff).setInteractive()
+    var colorLabel = this.add.bitmapText(700, 250, 'topaz', 'Table Color', 35).setOrigin(.5).setTint(0xffffff);
+    var backBack = this.add.image(700, 400, 'blank').setTint(0xcbf7ff).setInteractive()
     backBack.displayWidth = 150
     backBack.displayHeight = deck.displayHeight
 
 
-    var back = this.add.image(675, 350, 'blank').setTint(bgColors[onColor]).setInteractive()
+    var back = this.add.image(700, 400, 'blank').setTint(bgColors[onColor]).setInteractive()
     back.displayWidth = backBack.displayWidth - 20
     back.displayHeight = backBack.displayHeight - 20
     back.on('pointerdown', function () {
@@ -79,7 +80,9 @@ class startGame extends Phaser.Scene {
       gameSettings.color = onColor
       localStorage.setItem('Patience', JSON.stringify(gameSettings));
     }, this)
+    var instructions = this.add.bitmapText(450, 530, 'topaz', '(Click to change)', 30).setOrigin(.5).setTint(0xffffff);
 
+    var gameLabel = this.add.bitmapText(game.config.width / 2, 660, 'topaz', 'Pick Your Game', 75).setOrigin(.5).setTint(0xcbf7ff);
 
     for (var g = 0; g < games.length; g++) {
       //check if the number is even
@@ -90,7 +93,7 @@ class startGame extends Phaser.Scene {
         var x = 425;
         var ty = g - 1
       }
-      var y = 575 + ty * 50;
+      var y = 775 + ty * 50;
 
       var gameText = this.add.bitmapText(x, y, 'topaz', games[g].name, 60).setOrigin(0, .5).setTint(0xffffff).setInteractive();
       gameText.name = games[g].name
