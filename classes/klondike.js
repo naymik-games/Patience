@@ -29,10 +29,14 @@ class Klondike {
         if (row == this.tabSetUp[col]) {
           var frame = card.index;
           card.faceDown = false
+          card.setFrame(frame)
         } else {
-          var frame = 52;
+          var frame = onBack;
+          card.setTexture('backs', frame)
+          card.displayWidth = card.cardWidth
+          card.displayHeight = card.cardHeight
         }
-        card.setFrame(frame)
+
         card.place = 'tableau'
         card.stack = col
         card.slot = row
@@ -54,6 +58,10 @@ class Klondike {
     var length = d.cards.length
     for (var i = 0; i < length; i++) {
       var card = d.cards.pop();
+      var frame = onBack;
+      card.setTexture('backs', frame)
+      card.displayWidth = card.cardWidth
+      card.displayHeight = card.cardHeight
       card.place = 'stock'
       card.stack = -1
       stock.push(card)
@@ -117,8 +125,13 @@ class Klondike {
       var card = waste.pop()
       card.place = 'stock'
       card.stack = -1
+      var frame = onBack;
+      card.setTexture('backs', frame)
+      card.displayWidth = card.cardWidth
+      card.displayHeight = card.cardHeight
+      card.faceDown = true;
       stock.push(card)
-      card.flip('b')
+      // card.flip('b')
       var tween = this.scene.tweens.add({
         targets: card,
         x: stockPosition.x,

@@ -56,6 +56,8 @@ class playGame extends Phaser.Scene {
     console.log(frame)
     var cutWidth = frame.cutWidth
     var cutHeight = frame.cutHeight
+    /*  var frameB = this.textures.getFrame('backs', 0);
+     console.log(frameB) */
     this.cameras.main.setBackgroundColor(bgColors[onColor]);
 
     this.cardSpacing = 15;
@@ -119,10 +121,10 @@ class playGame extends Phaser.Scene {
         //code if game only has one foundation
       }
       if (gameRules.showFoundationLabel) {
-        this.rTextC = this.add.bitmapText(foundPositions[0].x, foundPositions[0].y, 'topaz', '5', 100).setOrigin(.5).setTint(0xffffff);
-        this.rTextD = this.add.bitmapText(foundPositions[1].x, foundPositions[1].y, 'topaz', '10', 100).setOrigin(.5).setTint(0xffffff);
-        this.rTextH = this.add.bitmapText(foundPositions[2].x, foundPositions[2].y, 'topaz', 'J', 100).setOrigin(.5).setTint(0xffffff);
-        this.rTextS = this.add.bitmapText(foundPositions[3].x, foundPositions[3].y, 'topaz', '2', 100).setOrigin(.5).setTint(0xffffff);
+        this.rTextC = this.add.bitmapText(foundPositions[0].x, foundPositions[0].y - 5, 'topaz', '5', 100).setOrigin(.5).setTint(0xffffff);
+        this.rTextD = this.add.bitmapText(foundPositions[1].x, foundPositions[1].y - 5, 'topaz', '10', 100).setOrigin(.5).setTint(0xffffff);
+        this.rTextH = this.add.bitmapText(foundPositions[2].x, foundPositions[2].y - 5, 'topaz', 'J', 100).setOrigin(.5).setTint(0xffffff);
+        this.rTextS = this.add.bitmapText(foundPositions[3].x, foundPositions[3].y - 5, 'topaz', '2', 100).setOrigin(.5).setTint(0xffffff);
 
       }
 
@@ -162,7 +164,7 @@ class playGame extends Phaser.Scene {
     }
 
     let gameBoard = new Board();
-    d = new Deck(this, s);
+    d = new Deck(this, s, this.cardWidth, this.cardHeight);
     console.log(d.cards)
 
     //create markers

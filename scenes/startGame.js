@@ -16,6 +16,7 @@ class startGame extends Phaser.Scene {
     }
     onDeck = gameSettings.deckNum
     onColor = gameSettings.color
+    onBack = gameSettings.back
     this.cameras.main.setBackgroundColor(0x077837);
 
     var title = this.add.bitmapText(game.config.width / 2, 100, 'topaz', 'PATIENCE', 150).setOrigin(.5).setTint(0xcbf7ff);
@@ -39,6 +40,25 @@ class startGame extends Phaser.Scene {
       gameSettings.deckNum = onDeck
       localStorage.setItem('Patience', JSON.stringify(gameSettings));
     }, this)
+
+
+
+    var deckBack = this.add.image(450, 350, 'backs', onBack).setInteractive()
+    deckBack.displayWidth = 150
+    deckBack.displayHeight = deck.displayHeight
+    deckBack.on('pointerdown', function () {
+      onBack++
+
+      if (onBack == 10) {
+        onBack = 0
+      }
+      deckBack.setFrame(onBack)
+      gameSettings.back = onBack
+      localStorage.setItem('Patience', JSON.stringify(gameSettings));
+    }, this)
+
+
+
 
     var backBack = this.add.image(675, 350, 'blank').setTint(0xcbf7ff).setInteractive()
     backBack.displayWidth = 150

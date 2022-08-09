@@ -1,4 +1,4 @@
-var cacheName = 'Patience v.02';
+var cacheName = 'Patience v.03';
 var filesToCache = [
   '/',
   '/index.html',
@@ -30,6 +30,10 @@ var filesToCache = [
   '/assets/sprites/cards_largeindex.png',
   '/assets/sprites/cards_modern.png',
   '/assets/sprites/cards_sixties_2.png',
+  '/assets/sprites/cards_simple.png',
+  '/assets/sprites/cards_black_simple.png',
+  '/assets/sprites/cards_real.png',
+  '/assets/sprites/backs.png',
   //'https://cdn.jsdelivr.net/gh/photonstorm/phaser@3.10.1/dist/phaser.min.js'
 ];
 self.addEventListener('install', function (event) {

@@ -31,7 +31,10 @@ class Yukon {
           var frame = card.index;
           card.faceDown = false
         } else {
-          var frame = 52;
+          var frame = onBack;
+          card.setTexture('backs', frame)
+          card.displayWidth = card.cardWidth
+          card.displayHeight = card.cardHeight
         }
         card.setFrame(frame)
         card.place = 'tableau'

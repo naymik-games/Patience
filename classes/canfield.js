@@ -32,6 +32,11 @@ class Canfield {
       if (i == 12) {
         card.setFrame(card.index)
         card.faceDown = false
+      } else {
+        var frame = onBack;
+        card.setTexture('backs', frame)
+        card.displayWidth = card.cardWidth
+        card.displayHeight = card.cardHeight
       }
 
       this.scene.children.bringToTop(card)
@@ -101,6 +106,10 @@ class Canfield {
     var length = d.cards.length
     for (var i = 0; i < length; i++) {
       var card = d.cards.pop();
+      var frame = onBack;
+      card.setTexture('backs', frame)
+      card.displayWidth = card.cardWidth
+      card.displayHeight = card.cardHeight
       card.place = 'stock'
       card.stack = -1
       stock.push(card)
@@ -160,10 +169,16 @@ class Canfield {
     var length = waste.length
     for (var i = 0; i < length; i++) {
       var card = waste.pop()
+      var frame = onBack;
+      card.setTexture('backs', frame)
+      card.displayWidth = card.cardWidth
+      card.displayHeight = card.cardHeight
+      card.faceDown = true;
       card.place = 'stock'
       card.stack = -1
       stock.push(card)
-      card.flip('b')
+      //card.flip('b')
+
       var tween = this.scene.tweens.add({
         targets: card,
         x: stockPosition.x,

@@ -122,6 +122,18 @@ class preloadGame extends Phaser.Scene {
       spacing: 2,
       margin: 2
     });
+    this.load.spritesheet("cards_real", "assets/sprites/cards_real.png", {
+      frameWidth: 103,
+      frameHeight: 138,
+      spacing: 10,
+      margin: 5
+    });
+    this.load.spritesheet("backs", "assets/sprites/backs.png", {
+      frameWidth: 178,
+      frameHeight: 250,
+      spacing: 2,
+      margin: 0
+    });
     this.load.image('blank', 'assets/sprites/blank.png');
 
   }

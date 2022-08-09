@@ -7,8 +7,8 @@
   }
 } */
 class Card extends Phaser.GameObjects.Image {
-  constructor(scene, x, y, texture, frame, suit, suitNum, rank, rankShort, value, index, scale, color) {
-    super(scene, x, y, texture, frame, suit, rank, value, index, scale, color);
+  constructor(scene, x, y, texture, frame, suit, suitNum, rank, rankShort, value, index, scale, color, cardWidth, cardHeight) {
+    super(scene, x, y, texture, frame, suit, rank, value, index, scale, color, cardWidth, cardHeight);
     // ...
     scene.add.existing(this);
     this.suit = suit;
@@ -21,6 +21,8 @@ class Card extends Phaser.GameObjects.Image {
     this.faceDown = true;
     this.setScale(scale)
     this.cardScale = scale
+    this.cardWidth = cardWidth
+    this.cardHeight = cardHeight
     this.place = 'stock'
     this.stack = 0
     this.slot = null
@@ -44,10 +46,16 @@ class Card extends Phaser.GameObjects.Image {
     // this.flipCard.frameNr = 0; // Start with backside
     flipTween.on('complete', () => {
       if (dir == 'f') {
-        this.setFrame(this.index)
+        var frame = this.index
+        this.setTexture(cardKey, frame)
+        //card.displayWidth = card.cardWidth
+        //  card.displayHeight = card.cardHeight
         this.faceDown = false;
       } else {
-        this.setFrame(52)
+        var frame = onBack;
+        this.setTexture('backs', frame)
+        this.displayWidth = this.cardWidth
+        this.displayHeight = this.cardHeight
         this.faceDown = true;
       }
 
@@ -72,13 +80,13 @@ class Card extends Phaser.GameObjects.Image {
   // preUpdate(time, delta) {}
 }
 class Deck {
-  constructor(scene, scale) {
+  constructor(scene, scale, cardWidth, cardHeight) {
     this.cards = [];
     this.scene = scene
-    this.createDeck(scale)
+    this.createDeck(scale, cardWidth, cardHeight)
     this.shuffleDeck()
   }
-  createDeck(scale) {
+  createDeck(scale, cardWidth, cardHeight) {
     let suits = ['clubs', 'diamonds', 'hearts', 'spades'];
     let ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king'];
     let ranksShort = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -91,7 +99,7 @@ class Deck {
         } else {
           var color = 'red';
         }
-        this.cards.push(new Card(this.scene, game.config.width / 2, game.config.height / 2 + 300, cardKey, 52, suits[i], i, ranks[j], ranksShort[j], values[j], f, scale, color));
+        this.cards.push(new Card(this.scene, game.config.width / 2, game.config.height / 2 + 300, cardKey, onBack, suits[i], i, ranks[j], ranksShort[j], values[j], f, scale, color, cardWidth, cardHeight));
 
         f++
       }

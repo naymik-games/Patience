@@ -16,6 +16,7 @@ let defaultSettings = { deckNum: 0, sound: false, color: 0, back: 0 };
 let onColor = 0
 let cardKey
 let onDeck = 2
+let onBack = 3
 let decks = [
   {
     key: 'cards_modern',
@@ -36,6 +37,10 @@ let decks = [
   {
     key: 'cards_simple',
     name: 'Simple Dark'
+  },
+  {
+    key: 'cards_real',
+    name: 'Real'
   }
 ]
 let onGame = 1
