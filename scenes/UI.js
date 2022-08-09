@@ -28,9 +28,9 @@ class UI extends Phaser.Scene {
 
     this.settingIcon = this.add.image(680, 65, 'icons', 4).setInteractive().setTint(0x1b332d).setScale(.8);
     this.settingIcon.on('pointerdown', function () {
-      /* this.scene.launch('pauseGame');
-      this.scene.pause(currentGame);
-      this.scene.pause('UI'); */
+      this.scene.launch('pauseGame');
+      this.scene.pause('playGame');
+      this.scene.pause('UI');
     }, this);
 
 

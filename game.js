@@ -25,7 +25,7 @@ window.onload = function () {
       height: 1640
     },
 
-    scene: [preloadGame, startGame, playGame, UI]
+    scene: [preloadGame, startGame, playGame, UI, pauseGame]
   }
   game = new Phaser.Game(gameConfig);
   window.focus();
