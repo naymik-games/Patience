@@ -30,6 +30,10 @@ let decks = [
     name: 'Sixties'
   },
   {
+    key: 'cards_black_simple',
+    name: 'Basic Dark'
+  },
+  {
     key: 'cards_simple',
     name: 'Simple Dark'
   }
