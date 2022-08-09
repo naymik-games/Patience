@@ -50,6 +50,10 @@ class playGame extends Phaser.Scene {
       gameRules = new Yukon(this)
     } else if (onGame == 2) {
       gameRules = new Canfield(this)
+    } else if (onGame == 3) {
+      gameRules = new Golf(this)
+    } else if (onGame == 4) {
+      gameRules = new Aces(this)
     }
     cardKey = decks[onDeck].key
     var frame = this.textures.getFrame(cardKey, 0);
@@ -103,7 +107,7 @@ class playGame extends Phaser.Scene {
     if (gameRules.foundation) {
       console.log('yes, foundation')
 
-      if (gameRules.foundation.num > 1) {
+      if (gameRules.foundation.num > 0) {
         //markers
         foundation = []
         foundPositions = []
@@ -175,7 +179,12 @@ class playGame extends Phaser.Scene {
 
     this.selection = []
     this.toSelection = {}
-    this.input.on('gameobjectdown', this.press, this)
+    if (gameRules.singleClick) {
+      this.input.on('gameobjectdown', this.pressSingle, this)
+    } else {
+      this.input.on('gameobjectdown', this.press, this)
+    }
+
     //d.cards[d.cards.length - 1].flip()
     /* this.input.on("pointerdown", this.gemSelect, this);
      this.input.on("pointermove", this.drawPath, this);
@@ -185,6 +194,17 @@ class playGame extends Phaser.Scene {
   }
   update() {
 
+  }
+  pressSingle(pointer, card) {
+    if (card.faceDown && card.place == 'tableau') { return }
+    if (card.faceDown && card.place == 'stock') {
+      gameRules.drawStock()
+    }
+    if (!card.faceDown && card.place == 'tableau') {
+      this.selection.push(card);
+      gameRules.moveSelected();
+
+    }
   }
   press(pointer, card) {
     // console.log(card.place)

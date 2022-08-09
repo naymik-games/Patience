@@ -59,5 +59,15 @@ let games = [
     name: 'Canfield',
     objective: 'To build the foundations up in suit until each pile contains thirteen cards.',
     rules: 'You can fill up foundations using the top card of the reserve or tableau piles. You can move cards from one tableau pile to another, and from a reserve pile to a tableau pile in descending sequence of alternating suit colors. You can move either a single card or a set of cards. When one of the tableaus becomes empty it will be filled immediately with a card from the reserve pile.\nWhen you have made all the moves initially available, begin turning over cards from the stock pile. 3 cards at a time are turned over from the stock. You can move cards from the stock pile to tableaus or foundations following the rule above.\nThe stock pile can be turned over as many times as you wish.'
+  },
+  {
+    name: 'Golf',
+    objective: 'Transfer all the cards from the seven columns to the single waste pile as quickly as possible.',
+    rules: 'A single, exposed card from one of the seven columns may be transferred to the waste pile if it follows either an ascending or descending sequence regardless of suit. Sequences may turn the corner with Kings building on Aces and Aces building on Kings. When no more cards from the columns can be transferred to the waste pile, a card from the stock is dealt to the waste pile and building resumes.'
+  },
+  {
+    name: 'Aces Up',
+    objective: 'Transfer all the cards from the seven columns to the single waste pile as quickly as possible.',
+    rules: 'A single, exposed card from one of the seven columns may be transferred to the waste pile if it follows either an ascending or descending sequence regardless of suit. Sequences may turn the corner with Kings building on Aces and Aces building on Kings. When no more cards from the columns can be transferred to the waste pile, a card from the stock is dealt to the waste pile and building resumes.'
   }
 ]

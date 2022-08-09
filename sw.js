@@ -1,4 +1,4 @@
-var cacheName = 'Patience v.03';
+var cacheName = 'Patience v.04';
 var filesToCache = [
   '/',
   '/index.html',
@@ -9,6 +9,8 @@ var filesToCache = [
 
   '/scenes/preload.js',
   '/scenes/startGame.js',
+  '/scenes/gameOver.js',
+  '/scenes/pauseGame.js',
   '/scenes/UI.js',
 
   '/assets/fonts/topaz.png',
@@ -18,6 +20,7 @@ var filesToCache = [
   '/classes/settings.js',
   '/classes/yukon.js',
   '/classes/canfield.js',
+  '/classes/aces.js',
   '/classes/carGame.js',
 
 
