@@ -56,6 +56,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Aces(this)
     } else if (onGame == 5) {
       gameRules = new Cruel(this)
+    } else if (onGame == 6) {
+      gameRules = new Free(this)
     }
     cardKey = decks[onDeck].key
     var frame = this.textures.getFrame(cardKey, 0);
@@ -250,6 +252,7 @@ class playGame extends Phaser.Scene {
           return
         }
         //if card is in tableau and you are allowed to secelect multiple
+        if (gameRules.topSelectOnly && !this.isTopCard(card)) { return }
         if (card.place == 'tableau' && gameRules.allowMult) {
           var index = tableau[card.stack].findIndex(x => x.index === card.index);
 

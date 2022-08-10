@@ -176,7 +176,7 @@ class Cruel {
             y: tabPositions[col].y + row * this.tableauReveal,
             // y: 550 + row * 50,
             duration: 300,
-            delay: 200 + (col + row) * 100
+            delay: (col + row) * 100
           });
         }
 

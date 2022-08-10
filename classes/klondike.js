@@ -12,6 +12,7 @@ class Klondike {
     this.reserve = null
     this.allowRedeal = true
     this.allowMult = true
+
     this.moveKingEmpty = true
     this.moveToEmpty = true
     this.showFoundationLabel = false

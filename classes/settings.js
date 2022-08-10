@@ -86,5 +86,10 @@ let games = [
     name: 'Cruel',
     objective: 'Move all cards to the foundation.',
     rules: 'A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of the same suit.Cards on the tableau that are not under another card are available for play onto the foundation or any non-empty tableau pile.Empty spaces in the tableau may not be filled. Only one card may moved at a time. You may pick up and redeal the cards on the tableau an unlimited number of times.'
+  },
+  {
+    name: 'Free Cell',
+    objective: 'Move all cards to the foundation.',
+    rules: 'A card may be added onto a foundation pile if it is one higher than the old top card of the pile and of the same suit.Each cell can hold one card. Available cards can be played into any cell. Cards from cells can be played back to the tableau or to the foundation.A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of the opposite color.Cards on the tableau that are not under another card are available for play onto the foundation, an empty cell or any other tableau pile. Empty spaces in the tableau may be filled by any card. Only one card can be moved at a time.'
   }
 ]
