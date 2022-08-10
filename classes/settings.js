@@ -31,16 +31,8 @@ let decks = [
     name: 'Sixties'
   },
   {
-    key: 'cards_black_simple',
-    name: 'Basic Dark'
-  },
-  {
     key: 'cards_simple',
     name: 'Simple Dark'
-  },
-  {
-    key: 'cards_real',
-    name: 'Real'
   },
   {
     key: 'cards_apollo',
@@ -53,6 +45,14 @@ let decks = [
   {
     key: 'cards_classic',
     name: 'Classic'
+  },
+  {
+    key: 'cards_draw',
+    name: 'Draw'
+  },
+  {
+    key: 'cards_minimal',
+    name: 'Minimal'
   }
 ]
 let onGame = 1

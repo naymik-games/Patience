@@ -116,18 +116,8 @@ class preloadGame extends Phaser.Scene {
       spacing: 2,
       margin: 2
     });
-    this.load.spritesheet("cards_black_simple", "assets/sprites/cards_black_simple.png", {
-      frameWidth: 140,
-      frameHeight: 190,
-      spacing: 2,
-      margin: 2
-    });
-    this.load.spritesheet("cards_real", "assets/sprites/cards_real.png", {
-      frameWidth: 103,
-      frameHeight: 138,
-      spacing: 10,
-      margin: 5
-    });
+
+
     this.load.spritesheet("backs", "assets/sprites/backs.png", {
       frameWidth: 178,
       frameHeight: 250,
@@ -150,6 +140,18 @@ class preloadGame extends Phaser.Scene {
     this.load.spritesheet("cards_classic", "assets/sprites/cards_classic.png", {
       frameWidth: 140,
       frameHeight: 190,
+      spacing: 2,
+      margin: 2
+    });
+    this.load.spritesheet("cards_draw", "assets/sprites/cards_draw.png", {
+      frameWidth: 141,
+      frameHeight: 198,
+      spacing: 2,
+      margin: 2
+    });
+    this.load.spritesheet("cards_minimal", "assets/sprites/cards_minimal.png", {
+      frameWidth: 178,
+      frameHeight: 250,
       spacing: 2,
       margin: 2
     });

@@ -4,9 +4,9 @@ class Cruel {
     this.totalCols = 5
     this.cardSpacingX = 40
     this.cardSpacingY = 150
-    this.stock = { num: 1, col: 0, row: 0 }
+    this.stock = { num: 1, col: 4, row: 0 }
     this.waste = null
-    this.foundation = { num: 4, col: 1, row: 0, build: 'aceUp' }
+    this.foundation = { num: 4, col: 0, row: 0, build: 'aceUp' }
     this.tableau = { num: 12, col: 0, row: 1, build: 'suitdesc' }
     this.free = null
     this.reserve = null
