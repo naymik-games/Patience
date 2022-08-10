@@ -44,6 +44,8 @@ var filesToCache = [
   '/assets/sprites/cards_classic.png',
   '/assets/sprites/cards_draw.png',
   '/assets/sprites/cards_minimal.png',
+  '/assets/sprites/cards_mobile.png',
+  '/assets/sprites/cards_minipixel.png',
   '/assets/sprites/backs.png',
   //'https://cdn.jsdelivr.net/gh/photonstorm/phaser@3.10.1/dist/phaser.min.js'
 ];
