@@ -1,4 +1,4 @@
-var cacheName = 'Patience v.04';
+var cacheName = 'Patience v.05';
 var filesToCache = [
   '/',
   '/index.html',
@@ -20,7 +20,7 @@ var filesToCache = [
   '/classes/settings.js',
   '/classes/yukon.js',
   '/classes/canfield.js',
-  '/classes/aces.js',
+  '/classes/acesup.js',
   '/classes/carGame.js',
 
 
@@ -36,6 +36,9 @@ var filesToCache = [
   '/assets/sprites/cards_simple.png',
   '/assets/sprites/cards_black_simple.png',
   '/assets/sprites/cards_real.png',
+  '/assets/sprites/cards_apollo.png',
+  '/assets/sprites/cards_civ.png',
+  '/assets/sprites/cards_classic.png',
   '/assets/sprites/backs.png',
   //'https://cdn.jsdelivr.net/gh/photonstorm/phaser@3.10.1/dist/phaser.min.js'
 ];

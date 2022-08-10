@@ -2,6 +2,9 @@ class Aces {
   constructor(scene) {
     this.scene = scene
     this.totalCols = 5
+    this.cardSpacingX = 15
+    this.cardSpacingY = 15
+    this.acesHigh = true
     this.stock = { num: 1, col: 4, row: 0 }
     this.waste = { num: 1, col: 4, row: 1 }
     this.foundation = null
@@ -83,6 +86,7 @@ class Aces {
       //card.setPosition(15 + 184, 350 - 80.5);
       this.scene.children.bringToTop(card)
       card.place = 'tableau';
+      card.stack = i
       tableau[i].push(card);
       card.flip('f');
       var tween = this.scene.tweens.add({
@@ -133,6 +137,7 @@ class Aces {
                 }
               })
               this.scene.selection = []
+              return;
               // this.checkWin()
             } else {
               this.scene.selection = []
@@ -144,13 +149,33 @@ class Aces {
           this.scene.selection = []
         }
       }//end for
-      /*  for (var i = 0; i < 4; i++) {
-         if (from.stack != i && tableau[i].length == 0) {
-           //this.moveCard(card, i);
-           return;
-         }
- 
-       } */
+      for (var i = 0; i < 4; i++) {
+        if (from.stack != i && tableau[i].length == 0) {
+
+          tableau[from.stack].pop()
+          from.stack = i
+
+
+          tableau[i].push(from);
+
+          this.scene.children.bringToTop(from)
+          // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
+          var tween = this.scene.tweens.add({
+            targets: from,
+            x: tabPositions[i].x,
+            y: tabPositions[i].y,
+            duration: 200,
+            onCompleteScope: this.scene,
+            onComplete: function () {
+
+            }
+          })
+          this.scene.selection = []
+          return;
+        }
+
+      }
+
 
     } else {
       this.scene.selection = []

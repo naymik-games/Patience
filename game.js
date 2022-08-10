@@ -54,6 +54,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Golf(this)
     } else if (onGame == 4) {
       gameRules = new Aces(this)
+    } else if (onGame == 5) {
+      gameRules = new Cruel(this)
     }
     cardKey = decks[onDeck].key
     var frame = this.textures.getFrame(cardKey, 0);
@@ -64,8 +66,8 @@ class playGame extends Phaser.Scene {
      console.log(frameB) */
     this.cameras.main.setBackgroundColor(bgColors[onColor]);
 
-    this.cardSpacing = 15;
-    this.cardSpacingY = 15;
+    this.cardSpacing = gameRules.cardSpacingX;
+    this.cardSpacingY = gameRules.cardSpacingY;
 
     this.cardBlank = 62;
     var cols = gameRules.totalCols;
@@ -137,13 +139,27 @@ class playGame extends Phaser.Scene {
     if (gameRules.tableau) {
       tableau = []
       tabPositions = []
-      for (var t = gameRules.tableau.col; t < gameRules.tableau.col + gameRules.tableau.num; t++) {
-        var x = this.cardSpacing + this.cardWidth / 2 + t * (this.cardWidth + this.cardSpacing)
-        var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.tableau.row * (this.cardHeight + this.cardSpacingY)
-        tabPositions.push({ x: x, y: y })
-        var tab = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setInteractive().setDepth(0).setAlpha(.5);
-        tableau.push(new Array())
+      if (onGame == 5) {
+        for (var row = 1; row < 4; row++) {
+          for (var col = 0; col < 4; col++) {
+            var x = this.cardSpacing + this.cardWidth / 2 + col * (this.cardWidth + this.cardSpacing)
+            var y = (gameRules.yOffset + this.cardSpacingY) + row * (this.cardHeight + this.cardSpacingY)
+            tabPositions.push({ x: x, y: y })
+            var tab = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setInteractive().setDepth(0).setAlpha(.5);
+            tableau.push(new Array())
+          }
+        }
+      } else {
+
+        for (var t = gameRules.tableau.col; t < gameRules.tableau.col + gameRules.tableau.num; t++) {
+          var x = this.cardSpacing + this.cardWidth / 2 + t * (this.cardWidth + this.cardSpacing)
+          var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.tableau.row * (this.cardHeight + this.cardSpacingY)
+          tabPositions.push({ x: x, y: y })
+          var tab = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setInteractive().setDepth(0).setAlpha(.5);
+          tableau.push(new Array())
+        }
       }
+
       console.log(tableau)
       console.log(tabPositions)
     }
@@ -161,7 +177,7 @@ class playGame extends Phaser.Scene {
     if (gameRules.waste) {
       var x = this.cardSpacing + this.cardWidth / 2 + gameRules.waste.col * (this.cardWidth + this.cardSpacing)
       var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.waste.row * (this.cardHeight + this.cardSpacingY)
-      this.wastePile = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(1).setAlpha(.5);
+      this.wastePile = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(0).setAlpha(.5);
       this.wastePile.place = 'wastePile'
       waste = []
       wastePosition = { x: x, y: y }
@@ -169,7 +185,10 @@ class playGame extends Phaser.Scene {
 
     let gameBoard = new Board();
     d = new Deck(this, s, this.cardWidth, this.cardHeight);
-    console.log(d.cards)
+    if (gameRules.acesHigh) {
+      d.acesHigh()
+    }
+
 
     //create markers
 

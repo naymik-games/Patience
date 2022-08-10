@@ -2,6 +2,8 @@ class Canfield {
   constructor(scene) {
     this.scene = scene
     this.totalCols = 6
+    this.cardSpacingX = 15
+    this.cardSpacingY = 15
     this.stock = { num: 1, col: 0, row: 2 }
     this.waste = { num: 1, col: 0, row: 1 }
     this.foundation = { num: 4, col: 2, row: 0, build: 'randomup' }

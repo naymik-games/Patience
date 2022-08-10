@@ -105,6 +105,13 @@ class Deck {
       }
     }
   }
+  acesHigh() {
+    for (let i = 0; i < this.cards.length; i++) {
+      if (this.cards[i].rank == 'ace') {
+        this.cards[i].value = 14;
+      }
+    }
+  }
   shuffleDeck() {
     let location1, location2, tmp;
     for (let i = 0; i < 1000; i++) {

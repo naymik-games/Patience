@@ -134,6 +134,25 @@ class preloadGame extends Phaser.Scene {
       spacing: 2,
       margin: 0
     });
+    this.load.spritesheet("cards_apollo", "assets/sprites/cards_apollo.png", {
+      frameWidth: 178,
+      frameHeight: 250,
+      spacing: 2,
+      margin: 2
+    });
+
+    this.load.spritesheet("cards_civ", "assets/sprites/cards_civ.png", {
+      frameWidth: 225,
+      frameHeight: 315,
+      spacing: 2,
+      margin: 2
+    });
+    this.load.spritesheet("cards_classic", "assets/sprites/cards_classic.png", {
+      frameWidth: 140,
+      frameHeight: 190,
+      spacing: 2,
+      margin: 2
+    });
     this.load.image('blank', 'assets/sprites/blank.png');
 
   }

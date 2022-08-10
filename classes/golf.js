@@ -2,6 +2,8 @@ class Golf {
   constructor(scene) {
     this.scene = scene
     this.totalCols = 7
+    this.cardSpacingX = 15
+    this.cardSpacingY = 15
     this.stock = { num: 1, col: 0, row: 3 }
     this.waste = { num: 1, col: 3, row: 3 }
     this.foundation = null
@@ -46,6 +48,9 @@ class Golf {
 
       }
     }
+
+
+
     //set up stock
     var length = d.cards.length
     for (var i = 0; i < length; i++) {
@@ -67,7 +72,7 @@ class Golf {
         delay: 1500,
         onCompleteScope: this,
         onComplete: function () {
-          //this.drawStock()
+
         }
       });
 

@@ -41,6 +41,18 @@ let decks = [
   {
     key: 'cards_real',
     name: 'Real'
+  },
+  {
+    key: 'cards_apollo',
+    name: 'Apollo'
+  },
+  {
+    key: 'cards_civ',
+    name: 'Civilization'
+  },
+  {
+    key: 'cards_classic',
+    name: 'Classic'
   }
 ]
 let onGame = 1
@@ -67,6 +79,11 @@ let games = [
   },
   {
     name: 'Aces Up',
+    objective: 'Transfer all the cards from the seven columns to the single waste pile as quickly as possible.',
+    rules: 'A single, exposed card from one of the seven columns may be transferred to the waste pile if it follows either an ascending or descending sequence regardless of suit. Sequences may turn the corner with Kings building on Aces and Aces building on Kings. When no more cards from the columns can be transferred to the waste pile, a card from the stock is dealt to the waste pile and building resumes.'
+  },
+  {
+    name: 'Cruel',
     objective: 'Transfer all the cards from the seven columns to the single waste pile as quickly as possible.',
     rules: 'A single, exposed card from one of the seven columns may be transferred to the waste pile if it follows either an ascending or descending sequence regardless of suit. Sequences may turn the corner with Kings building on Aces and Aces building on Kings. When no more cards from the columns can be transferred to the waste pile, a card from the stock is dealt to the waste pile and building resumes.'
   }

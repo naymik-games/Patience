@@ -2,6 +2,8 @@ class Klondike {
   constructor(scene) {
     this.scene = scene
     this.totalCols = 7
+    this.cardSpacingX = 15
+    this.cardSpacingY = 15
     this.stock = { num: 1, col: 0, row: 0 }
     this.waste = { num: 1, col: 1, row: 0 }
     this.foundation = { num: 4, col: 3, row: 0, build: 'aceUp' }
