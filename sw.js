@@ -24,6 +24,7 @@ var filesToCache = [
   '/classes/cruel.js',
   '/classes/freecell.js',
   '/classes/golf.js',
+  '/classes/scorpion.js',
   '/classes/carGame.js',
 
 

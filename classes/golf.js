@@ -14,6 +14,7 @@ class Golf {
     this.allowMult = false
     this.moveKingEmpty = false
     this.showFoundationLabel = false
+    this.allowFoundCheck = false
     this.singleClick = true
     this.foundationValue = 1
     this.draw = 1

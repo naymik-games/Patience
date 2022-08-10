@@ -16,6 +16,7 @@ class Canfield {
     this.moveToEmpty = true
     this.showFoundationLabel = true
     this.foundationValue = null
+    this.allowFoundCheck = true
     this.draw = 3
     this.yOffset = 250
     this.redealMax = 400

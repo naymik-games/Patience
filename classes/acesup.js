@@ -17,6 +17,7 @@ class Aces {
     this.showFoundationLabel = false
     this.singleClick = true
     this.foundationValue = 1
+    this.allowFoundCheck = false
     this.draw = 1
     this.yOffset = 300
     this.redealMax = 200

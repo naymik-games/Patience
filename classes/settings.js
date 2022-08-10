@@ -99,5 +99,10 @@ let games = [
     name: 'Free Cell',
     objective: 'Move all cards to the foundation.',
     rules: 'A card may be added onto a foundation pile if it is one higher than the old top card of the pile and of the same suit.Each cell can hold one card. Available cards can be played into any cell. Cards from cells can be played back to the tableau or to the foundation.A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of the opposite color.Cards on the tableau that are not under another card are available for play onto the foundation, an empty cell or any other tableau pile. Empty spaces in the tableau may be filled by any card. Only one card can be moved at a time.'
+  },
+  {
+    name: 'Scorpion',
+    objective: 'Create four stacks, King down to Ace',
+    rules: 'Build tableau piles down in suit. Groups of cards can be moved regardless of any sequence. Any face up card in a tableau can be moved to make a build. All the cards covering it are moved together as a unit. Empty tableaus may be filled with a King or group of cards headed by a King. When you have made all the moves initially available, click on the reserve pile to deal the 3 remaining cards face up to the three leftmost piles.'
   }
 ]

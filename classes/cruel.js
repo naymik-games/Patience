@@ -15,6 +15,7 @@ class Cruel {
     this.moveKingEmpty = false
     this.moveToEmpty = false
     this.showFoundationLabel = false
+    this.allowFoundCheck = true
     this.foundationValue = 1
     this.draw = 3
     this.yOffset = 125

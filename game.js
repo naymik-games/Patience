@@ -58,6 +58,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Cruel(this)
     } else if (onGame == 6) {
       gameRules = new Free(this)
+    } else if (onGame == 7) {
+      gameRules = new Scorpion(this)
     }
     cardKey = decks[onDeck].key
     var frame = this.textures.getFrame(cardKey, 0);
@@ -247,7 +249,7 @@ class playGame extends Phaser.Scene {
       if (this.selection.length === 0) {
         if (card.place == 'cell') { return }
         //check if card can go to foundation
-        if (this.checkFoundation(card.suitNum, card.value, card) && this.isTopCard(card)) {
+        if (this.checkFoundation(card.suitNum, card.value, card) && this.isTopCard(card) && gameRules.allowFoundCheck) {
           gameRules.moveToFoundation(card)
           return
         }
