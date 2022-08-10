@@ -84,7 +84,7 @@ let games = [
   },
   {
     name: 'Cruel',
-    objective: 'Transfer all the cards from the seven columns to the single waste pile as quickly as possible.',
-    rules: 'A single, exposed card from one of the seven columns may be transferred to the waste pile if it follows either an ascending or descending sequence regardless of suit. Sequences may turn the corner with Kings building on Aces and Aces building on Kings. When no more cards from the columns can be transferred to the waste pile, a card from the stock is dealt to the waste pile and building resumes.'
+    objective: 'Move all cards to the foundation.',
+    rules: 'A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of the same suit.Cards on the tableau that are not under another card are available for play onto the foundation or any non-empty tableau pile.Empty spaces in the tableau may not be filled. Only one card may moved at a time. You may pick up and redeal the cards on the tableau an unlimited number of times.'
   }
 ]

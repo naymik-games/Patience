@@ -11,12 +11,13 @@ class Cruel {
     this.free = null
     this.reserve = null
     this.allowRedeal = true
-    this.allowMult = true
+    this.allowMult = false
     this.moveKingEmpty = false
+    this.moveToEmpty = false
     this.showFoundationLabel = false
     this.foundationValue = 1
     this.draw = 3
-    this.yOffset = 100
+    this.yOffset = 125
     this.redealMax = 200
     this.tableauReveal = 30
     this.redealCount = 0
@@ -31,10 +32,10 @@ class Cruel {
     //pull out aces
     for (let i = 0; i < 4; i++) {
       var index = d.cards.findIndex(x => x.rank === 'ace');
-      console.log(index)
+      // console.log(index)
       var aceArray = d.cards.splice(index, 1);
       var ace = aceArray[0]
-      console.log(ace.suitNum)
+      //console.log(ace.suitNum)
       ace.setFrame(ace.index)
       ace.stack = ace.suitNum
       ace.place = 'foundation'
@@ -103,12 +104,13 @@ class Cruel {
           duration: 200,
           onCompleteScope: this.scene,
           onComplete: function () {
-            this.selection = []
+
           }
         })
 
 
       }
+      this.scene.selection = []
     } else {
       for (var i = 0; i < this.scene.selection.length; i++) {
         var from = this.scene.selection[i];
@@ -116,6 +118,7 @@ class Cruel {
       }
       this.scene.selection = []
     }
+    console.log(this.scene.selection)
   }
   moveToFoundation(card) {
 
@@ -133,11 +136,64 @@ class Cruel {
       duration: 200,
       onCompleteScope: this,
       onComplete: function () {
-        //this.checkWin()
+        this.checkWin()
       }
     })
+    this.scene.selection = []
   }
   redeal() {
     //he technically correct order is to "shuffle" by taking the cards on the first pile, putting them on top of the cards from the second pile, then on top of the third, and so on, then taking the top four cards and putting them back in the first pile, then the next four cards in the second, and so on.
+    let cardsTemp = []
+    /* for (var col = 0; col < 12; col++) {
+      cardsTemp.push(...tableau[col]);
+    } */
+    for (var col = 0; col < 12; col++) {
+      let stackLength = tableau[col].length
+      for (var row = 0; row < stackLength; row++) {
+        var c = tableau[col].shift()
+        cardsTemp.push(c)
+      }
+    }
+    console.log(tableau)
+    console.log(cardsTemp)
+    for (var col = 0; col < 12; col++) {
+      for (var row = 0; row < 4; row++) {
+        if (cardsTemp.length > 0) {
+          var card = cardsTemp.shift();
+
+          var frame = card.index;
+          card.faceDown = false
+          card.setFrame(frame)
+
+          card.place = 'tableau'
+          card.stack = col
+          card.slot = row
+          tableau[col].push(card)
+          this.scene.children.bringToTop(card)
+          var tween = this.scene.tweens.add({
+            targets: card,
+            x: tabPositions[col].x,
+            y: tabPositions[col].y + row * this.tableauReveal,
+            // y: 550 + row * 50,
+            duration: 300,
+            delay: 200 + (col + row) * 100
+          });
+        }
+
+      }
+    }
+    console.log(tableau)
+
+  }
+  checkWin() {
+    for (var f = 0; f < this.foundation.num; f++) {
+      if (foundation[f].length < 13) {
+        return
+      }
+    }
+    //gameData[currentGameNum].wins++;
+    //this.saveData();
+
+    alert('win!')
   }
 }

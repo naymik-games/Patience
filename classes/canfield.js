@@ -13,6 +13,7 @@ class Canfield {
     this.allowRedeal = true
     this.allowMult = true
     this.moveKingEmpty = false
+    this.moveToEmpty = true
     this.showFoundationLabel = true
     this.foundationValue = null
     this.draw = 3

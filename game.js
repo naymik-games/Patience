@@ -59,7 +59,7 @@ class playGame extends Phaser.Scene {
     }
     cardKey = decks[onDeck].key
     var frame = this.textures.getFrame(cardKey, 0);
-    console.log(frame)
+
     var cutWidth = frame.cutWidth
     var cutHeight = frame.cutHeight
     /*  var frameB = this.textures.getFrame('backs', 0);
@@ -73,7 +73,7 @@ class playGame extends Phaser.Scene {
     var cols = gameRules.totalCols;
     var cardSpace = game.config.width - (this.cardSpacing * (cols + 1))
     var s = (cardSpace / cols) / cutWidth
-    console.log(s)
+
     this.scale = s;
     this.cardWidth = cutWidth * this.scale;
     this.cardHeight = cutHeight * this.scale;
@@ -107,7 +107,7 @@ class playGame extends Phaser.Scene {
     }
     //FOUNDATION///////////////////////////////////////////
     if (gameRules.foundation) {
-      console.log('yes, foundation')
+
 
       if (gameRules.foundation.num > 0) {
         //markers
@@ -121,8 +121,8 @@ class playGame extends Phaser.Scene {
           foundation.push(new Array())
         }
         //arrays
-        console.log(foundation)
-        console.log(foundPositions)
+        // console.log(foundation)
+        //console.log(foundPositions)
       } else {
         //code if game only has one foundation
       }
@@ -160,8 +160,8 @@ class playGame extends Phaser.Scene {
         }
       }
 
-      console.log(tableau)
-      console.log(tabPositions)
+      // console.log(tableau)
+      // console.log(tabPositions)
     }
 
     //STOCK/////////////////////////////////////////////////
@@ -194,7 +194,7 @@ class playGame extends Phaser.Scene {
 
     gameRules.deal()
 
-    console.log(tableau)
+    // console.log(tableau)
 
     this.selection = []
     this.toSelection = {}
@@ -228,6 +228,7 @@ class playGame extends Phaser.Scene {
   press(pointer, card) {
     // console.log(card.place)
     var debug = 'Place ' + card.place + ', Stack ' + card.stack + ', Suit ' + card.suit + ', Value ' + card.value + ', Index ' + card.index
+    console.log('selection length' + this.selection.length)
     console.log(debug)
     if (card.place == 'drawPile') {
       //console.log("restock")
@@ -279,8 +280,9 @@ class playGame extends Phaser.Scene {
         } else {
           //if card is in tableau and you are not allowed multiple select card then check for auto move king if allowed
           this.selection.push(card);
+          console.log(this.selection)
           card.setTint(0x00ff00);
-          if (card.value == 13 && gameRules.moveKingEmpty) {
+          if (card.value == 13 && gameRules.moveKingEmpty && gameRules.moveToEmpty) {
             var temp = this.findEmptyStack();
             if (temp > -1) {
               var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }
@@ -288,7 +290,7 @@ class playGame extends Phaser.Scene {
 
             }
             return
-          } else if (!gameRules.moveKingEmpty) {
+          } else if (!gameRules.moveKingEmpty && gameRules.moveToEmpty) {
             console.log('finding empty spot')
             var temp = this.findEmptyStack();
             if (temp > -1) {
@@ -303,7 +305,7 @@ class playGame extends Phaser.Scene {
       } else {
         //SECOND CLICK
         if (this.selection.length > 0) {
-          console.log('move cards')
+          // console.log('move cards')
 
           gameRules.moveSelected(card)
         }
