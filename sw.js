@@ -1,4 +1,4 @@
-var cacheName = 'Patience v.06';
+var cacheName = 'Patience v.07';
 var filesToCache = [
   '/',
   '/index.html',
@@ -26,6 +26,7 @@ var filesToCache = [
   '/classes/golf.js',
   '/classes/scorpion.js',
   '/classes/alternations.js',
+  '/classes/spiderette.js',
   '/classes/carGame.js',
 
 

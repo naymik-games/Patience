@@ -109,5 +109,10 @@ let games = [
     name: 'Alternations',
     objective: 'Move all cards to the foundation.',
     rules: 'A card may be added onto a foundation pile if it is one higher than the old top card of the pile and of the same suit.  A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of the opposite color.Cards on the tableau that are not under another card are available for play onto the foundation or any other tableau pile. Empty spaces in the tableau may be filled by any card. Groups of cards in sequence down may be moved from one tableau column to another if the cards are alternately red and black.Each time you click on the stock, one card will be dealt from the stock to the waste. Only one pass through the stock is permitted.'
+  },
+  {
+    name: 'Spiderette',
+    objective: 'Sort all cards on the tableau downwards in the same suit',
+    rules: 'Single cards may never be moved to the foundation. Seven tableau piles with one card in the first pile, two cards in the second, three in the third, and so on. The top card in each pile is dealt face up, all others are face down. A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of any suit.Thus, the card that could be played on a five would be a four of any suit. Cards on the tableau that are not under another card are available for play onto any other tableau pile. Empty spaces in the tableau may be filled by any card. Groups of cards in sequence down may be moved from one tableau column to another if all cards are of the same suit. Each time you click on the stock, a card will be dealt on top of each tableau pile. '
   }
 ]

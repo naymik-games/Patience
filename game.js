@@ -62,6 +62,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Scorpion(this)
     } else if (onGame == 8) {
       gameRules = new Alternations(this)
+    } else if (onGame == 9) {
+      gameRules = new Spiderette(this)
     }
     cardKey = decks[onDeck].key
     var frame = this.textures.getFrame(cardKey, 0);
@@ -380,16 +382,31 @@ class playGame extends Phaser.Scene {
       console.log('only one so good')
       return true
     }
-    var value = tableau[stack][index].value;
-    var color = tableau[stack][index].color;
-    for (var i = index + 1; i < tableau[stack].length; i++) {
-      console.log('validating...')
-      if (tableau[stack][i].color == color || tableau[stack][i].value + 1 != value || tableau[stack][i].faceDown) {
-        return false
+
+    if (gameRules.tableau.build == 'suit') {
+      var value = tableau[stack][index].value;
+      var suit = tableau[stack][index].suit;
+      for (var i = index + 1; i < tableau[stack].length; i++) {
+        console.log('validating...')
+        if (tableau[stack][i].suit != suit || tableau[stack][i].value + 1 != value || tableau[stack][i].faceDown) {
+          return false
+        }
+        var value = tableau[stack][i].value;
+        var suit = tableau[stack][i].suit;
       }
-      var value = tableau[stack][i].value;
-      var color = tableau[stack][i].color;
+    } else {
+      var value = tableau[stack][index].value;
+      var color = tableau[stack][index].color;
+      for (var i = index + 1; i < tableau[stack].length; i++) {
+        console.log('validating...')
+        if (tableau[stack][i].color == color || tableau[stack][i].value + 1 != value || tableau[stack][i].faceDown) {
+          return false
+        }
+        var value = tableau[stack][i].value;
+        var color = tableau[stack][i].color;
+      }
     }
+
     return true
   }
   isTopCard(card) {
