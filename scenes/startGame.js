@@ -95,12 +95,12 @@ class startGame extends Phaser.Scene {
         var x = 50;
         var ty = g
       } else {
-        var x = 425;
+        var x = 450;
         var ty = g - 1
       }
       var y = 775 + ty * 50;
-
-      var gameText = this.add.bitmapText(x, y, 'topaz', games[g].name, 50).setOrigin(0, .5).setTint(0xffffff).setInteractive();
+      var text = games[g].name + ' (' + gameProgress[g][1] + '/' + gameProgress[g][0] + ')'
+      var gameText = this.add.bitmapText(x, y, 'topaz', text, 40).setOrigin(0, .5).setTint(0xffffff).setInteractive();
       gameText.name = games[g].name
       gameText.num = g;
 

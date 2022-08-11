@@ -185,4 +185,22 @@ class Scorpion {
 
     }
   }
+  checkWin() {
+    var fullStacks = []
+    for (var f = 0; f < this.tableau.num; f++) {
+      if (foundation[f].length == 13) {
+        fullStacks.push(f)
+      }
+    }
+    if (fullStacks.length == 4) {
+      gameProgress[onGame][1]++
+      localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
+      alert('win!')
+    } else {
+      return
+    }
+    //gameData[currentGameNum].wins++;
+    //this.saveData();
+
+  }
 }
