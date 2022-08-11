@@ -29,6 +29,12 @@ class Aces {
     this.stacksSetup = [[5], [5], [5], [5], [5], [5], [5]];
   }
   deal() {
+
+
+
+
+
+
     for (var col = 0; col < 4; col++) {
 
       var card = d.cards.pop();
@@ -139,8 +145,9 @@ class Aces {
                 }
               })
               this.scene.selection = []
+              this.checkWin()
               return;
-              // this.checkWin()
+
             } else {
               this.scene.selection = []
             }
@@ -187,4 +194,23 @@ class Aces {
 
 
   }//end move sle
+  checkWin() {
+    if (stock.length == 0) {
+      for (var f = 0; f < this.tableau.num; f++) {
+        if (tableau[f].length > 1) {
+          return
+        } else {
+          if (tableau[f][0].rank != 'ace') {
+            return
+          }
+        }
+      }
+    } else {
+      return
+    }
+    gameProgress[onGame][1]++
+    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
+    alert('win!')
+  }
+
 }

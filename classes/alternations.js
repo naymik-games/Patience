@@ -151,11 +151,13 @@ class Alternations {
           onCompleteScope: this.scene,
           onComplete: function () {
             this.selection = []
+
           }
         })
 
 
       }
+      this.checkWin()
       this.scene.flipStack(fromStack, fromPlace)
       /*  if (tableau[fromStack][tableau[fromStack].length - 1].faceDown) {
          tableau[fromStack][tableau[fromStack].length - 1].flip('f')
@@ -190,19 +192,19 @@ class Alternations {
       duration: 200,
       onCompleteScope: this,
       onComplete: function () {
-        this.checkWin()
+
       }
     })
   }
   checkWin() {
-    for (var f = 0; f < this.foundation.num; f++) {
-      if (foundation[f].length < 13) {
-        return
-      }
+    /* for (var f = 0; f < this.tableau.num; f++) {
+      
     }
+    gameProgress[onGame][1]++
+    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
     //gameData[currentGameNum].wins++;
     //this.saveData();
 
-    alert('win!')
+    alert('win!') */
   }
 }

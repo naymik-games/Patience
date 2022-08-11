@@ -247,7 +247,8 @@ class Klondike {
     }
     //gameData[currentGameNum].wins++;
     //this.saveData();
-
+    gameProgress[onGame][1]++
+    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
     alert('win!')
   }
 }

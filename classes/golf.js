@@ -184,7 +184,8 @@ class Golf {
     }
     //gameData[currentGameNum].wins++;
     //this.saveData();
-
+    gameProgress[onGame][1]++
+    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
     alert('win!')
     this.scene.scene.start('startGame')
     this.scene.scene.stop('playGame')

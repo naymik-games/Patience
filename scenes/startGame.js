@@ -14,6 +14,11 @@ class startGame extends Phaser.Scene {
       localStorage.setItem('Patience', JSON.stringify(defaultSettings));
       gameSettings = defaultSettings;
     }
+    gameProgress = JSON.parse(localStorage.getItem('PatienceProgress'));
+    if (gameProgress === null || gameProgress.length <= 0) {
+      localStorage.setItem('PatienceProgress', JSON.stringify(defaultSettings));
+      gameProgress = defaultGameProgress;
+    }
     onDeck = gameSettings.deckNum
     onColor = gameSettings.color
     onBack = gameSettings.back
@@ -113,9 +118,9 @@ class startGame extends Phaser.Scene {
   click(e, obj) {
 
     if (obj.name) {
-
-
       onGame = obj.num;
+      gameProgress[onGame][0]++
+      localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
       this.scene.start('playGame');
       this.scene.launch('UI');
     }
