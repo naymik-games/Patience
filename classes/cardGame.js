@@ -7,8 +7,8 @@
   }
 } */
 class Card extends Phaser.GameObjects.Image {
-  constructor(scene, x, y, texture, frame, suit, suitNum, foundNum, rank, rankShort, value, index, scale, color, cardWidth, cardHeight) {
-    super(scene, x, y, texture, frame, suit, rank, value, index, scale, color, cardWidth, cardHeight);
+  constructor(scene, x, y, texture, frame, suit, suitNum, foundNum, rank, rankShort, value, index, cardFrame, scale, color, cardWidth, cardHeight) {
+    super(scene, x, y, texture, frame, suit, rank, value, index, cardFrame, scale, color, cardWidth, cardHeight);
     // ...
     scene.add.existing(this);
     this.suit = suit;
@@ -18,6 +18,7 @@ class Card extends Phaser.GameObjects.Image {
     this.rankShort = rankShort;
     this.value = value;
     this.index = index
+    this.cardFrame = cardFrame
     this.color = color
     this.faceDown = true;
     this.setScale(scale)
@@ -47,7 +48,7 @@ class Card extends Phaser.GameObjects.Image {
     // this.flipCard.frameNr = 0; // Start with backside
     flipTween.on('complete', () => {
       if (dir == 'f') {
-        var frame = this.index
+        var frame = this.cardFrame
         this.setTexture(cardKey, frame)
         //card.displayWidth = card.cardWidth
         //  card.displayHeight = card.cardHeight
@@ -97,6 +98,7 @@ class Deck {
     let ranksShort = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
     let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     var f = 0
+    var cardIndex = 0 + (deckCount * 52)
     for (let i = 0; i < suits.length; i++) {
       for (let j = 0; j < ranks.length; j++) {
         if (suits[i] == 'clubs' || suits[i] == 'spades') {
@@ -105,9 +107,10 @@ class Deck {
           var color = 'red';
         }
         var foundNum = i + (deckCount * 4)
-        tempDeck.push(new Card(this.scene, game.config.width / 2, game.config.height / 2 + 300, cardKey, onBack, suits[i], i, foundNum, ranks[j], ranksShort[j], values[j], f, scale, color, cardWidth, cardHeight));
+        tempDeck.push(new Card(this.scene, game.config.width / 2, game.config.height / 2 + 300, cardKey, onBack, suits[i], i, foundNum, ranks[j], ranksShort[j], values[j], cardIndex, f, scale, color, cardWidth, cardHeight));
 
         f++
+        cardIndex++
       }
     }
     this.cards.push(...tempDeck)

@@ -252,7 +252,7 @@ class playGame extends Phaser.Scene {
         if (card.place == 'cell') { return }
         //check if card can go to foundation
         var foundationCheck = this.checkFoundation(card.suitNum, card.value, card)
-        if (foundationCheck > -1 && this.isTopCard(card) && gameRules.allowFoundCheck) {
+        if (foundationCheck > -1 && (this.isTopCard(card) && gameRules.allowFoundCheck || card.place == 'waste')) {
           gameRules.moveToFoundation(card, foundationCheck)
           return
         }

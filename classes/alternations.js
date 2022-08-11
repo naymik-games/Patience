@@ -33,7 +33,7 @@ class Alternations {
       for (var row = 0; row < this.stacksSetup[col]; row++) {
         var card = d.cards.pop();
         if (row == 0 || row == 2 || row == 4 || row == 6) {
-          var frame = card.index;
+          var frame = card.cardFrame;
           card.faceDown = false
           card.setFrame(frame)
         } else {
@@ -190,8 +190,19 @@ class Alternations {
       duration: 200,
       onCompleteScope: this,
       onComplete: function () {
-        //this.checkWin()
+        this.checkWin()
       }
     })
+  }
+  checkWin() {
+    for (var f = 0; f < this.foundation.num; f++) {
+      if (foundation[f].length < 13) {
+        return
+      }
+    }
+    //gameData[currentGameNum].wins++;
+    //this.saveData();
+
+    alert('win!')
   }
 }
