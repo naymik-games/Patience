@@ -2,6 +2,7 @@ class Free {
   constructor(scene) {
     this.scene = scene
     this.totalCols = 8
+    this.numDecks = 1
     this.cardSpacingX = 10
     this.cardSpacingY = 15
     this.stock = null

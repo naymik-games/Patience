@@ -2,6 +2,7 @@ class Cruel {
   constructor(scene) {
     this.scene = scene
     this.totalCols = 5
+    this.numDecks = 1
     this.cardSpacingX = 40
     this.cardSpacingY = 150
     this.stock = { num: 1, col: 4, row: 0 }

@@ -7,12 +7,13 @@
   }
 } */
 class Card extends Phaser.GameObjects.Image {
-  constructor(scene, x, y, texture, frame, suit, suitNum, rank, rankShort, value, index, scale, color, cardWidth, cardHeight) {
+  constructor(scene, x, y, texture, frame, suit, suitNum, foundNum, rank, rankShort, value, index, scale, color, cardWidth, cardHeight) {
     super(scene, x, y, texture, frame, suit, rank, value, index, scale, color, cardWidth, cardHeight);
     // ...
     scene.add.existing(this);
     this.suit = suit;
     this.suitNum = suitNum
+    this.foundNum = foundNum
     this.rank = rank;
     this.rankShort = rankShort;
     this.value = value;
@@ -80,13 +81,17 @@ class Card extends Phaser.GameObjects.Image {
   // preUpdate(time, delta) {}
 }
 class Deck {
-  constructor(scene, scale, cardWidth, cardHeight) {
+  constructor(scene, scale, cardWidth, cardHeight, numDecks) {
     this.cards = [];
     this.scene = scene
-    this.createDeck(scale, cardWidth, cardHeight)
+    for (var i = 0; i < numDecks; i++) {
+      this.createDeck(scale, cardWidth, cardHeight, i)
+    }
+
     this.shuffleDeck()
   }
-  createDeck(scale, cardWidth, cardHeight) {
+  createDeck(scale, cardWidth, cardHeight, deckCount) {
+    let tempDeck = []
     let suits = ['clubs', 'diamonds', 'hearts', 'spades'];
     let ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king'];
     let ranksShort = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -99,11 +104,13 @@ class Deck {
         } else {
           var color = 'red';
         }
-        this.cards.push(new Card(this.scene, game.config.width / 2, game.config.height / 2 + 300, cardKey, onBack, suits[i], i, ranks[j], ranksShort[j], values[j], f, scale, color, cardWidth, cardHeight));
+        var foundNum = i + (deckCount * 4)
+        tempDeck.push(new Card(this.scene, game.config.width / 2, game.config.height / 2 + 300, cardKey, onBack, suits[i], i, foundNum, ranks[j], ranksShort[j], values[j], f, scale, color, cardWidth, cardHeight));
 
         f++
       }
     }
+    this.cards.push(...tempDeck)
   }
   acesHigh() {
     for (let i = 0; i < this.cards.length; i++) {

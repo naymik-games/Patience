@@ -60,6 +60,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Free(this)
     } else if (onGame == 7) {
       gameRules = new Scorpion(this)
+    } else if (onGame == 8) {
+      gameRules = new Alternations(this)
     }
     cardKey = decks[onDeck].key
     var frame = this.textures.getFrame(cardKey, 0);
@@ -121,7 +123,7 @@ class playGame extends Phaser.Scene {
           var x = this.cardSpacing + this.cardWidth / 2 + f * (this.cardWidth + this.cardSpacing)
           var y = (gameRules.yOffset + this.cardSpacingY) + gameRules.foundation.row * (this.cardHeight + this.cardSpacingY)
           foundPositions.push({ x: x, y: y })
-          var found = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(0).setAlpha(.5);
+          var found = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setDepth(0).setAlpha(.2);
           foundation.push(new Array())
         }
         //arrays
@@ -188,12 +190,12 @@ class playGame extends Phaser.Scene {
     }
 
     let gameBoard = new Board();
-    d = new Deck(this, s, this.cardWidth, this.cardHeight);
+    d = new Deck(this, s, this.cardWidth, this.cardHeight, gameRules.numDecks);
     if (gameRules.acesHigh) {
       d.acesHigh()
     }
 
-
+    console.log(d.cards.length)
     //create markers
 
     gameRules.deal()
@@ -231,7 +233,7 @@ class playGame extends Phaser.Scene {
   }
   press(pointer, card) {
     // console.log(card.place)
-    var debug = 'Place ' + card.place + ', Stack ' + card.stack + ', Suit ' + card.suit + ', Value ' + card.value + ', Index ' + card.index
+    var debug = 'Place ' + card.place + ', Stack ' + card.stack + ', Suit ' + card.suit + ', Value ' + card.value + ', Index ' + card.index + ', SuitNum ' + card.suitNum + ', foundNum ' + card.foundNum
     console.log('selection length' + this.selection.length)
     console.log(debug)
     if (card.place == 'drawPile') {
@@ -249,16 +251,20 @@ class playGame extends Phaser.Scene {
       if (this.selection.length === 0) {
         if (card.place == 'cell') { return }
         //check if card can go to foundation
-        if (this.checkFoundation(card.suitNum, card.value, card) && this.isTopCard(card) && gameRules.allowFoundCheck) {
-          gameRules.moveToFoundation(card)
+        var foundationCheck = this.checkFoundation(card.suitNum, card.value, card)
+        if (foundationCheck > -1 && this.isTopCard(card) && gameRules.allowFoundCheck) {
+          gameRules.moveToFoundation(card, foundationCheck)
           return
         }
         //if card is in tableau and you are allowed to secelect multiple
         if (gameRules.topSelectOnly && !this.isTopCard(card)) { return }
         if (card.place == 'tableau' && gameRules.allowMult) {
-          var index = tableau[card.stack].findIndex(x => x.index === card.index);
-
-          for (var i = index; i < tableau[card.stack].length; i++) {
+          var stackIndex = tableau[card.stack].findIndex(x => x.index === card.index);
+          console.log('stack index ' + stackIndex)
+          if (!this.validateStack(stackIndex, card.stack)) {
+            return
+          }
+          for (var i = stackIndex; i < tableau[card.stack].length; i++) {
             var car = tableau[card.stack][i];
             car.setTint(0x00ff00);
             this.selection.push(car);
@@ -325,15 +331,36 @@ class playGame extends Phaser.Scene {
   }
   // foundation[num][foundation[num].length - 1].suitNum == num && foundation[num][foundation[num].length - 1].value + 1 == value
   checkFoundation(num, value, from) {
-    if (foundation[num].length == 0) {
-      if (value == gameRules.foundationValue) {
-        return true;
+    if (gameRules.numDecks == 2) {
+      if (foundation[num].length == 0) {
+        if (value == gameRules.foundationValue) {
+          return num;
+        }
+      } else if (this.checkSequenceFound(from, foundation[num][foundation[num].length - 1])) {
+        return num;
+      } else if (foundation[num + 4].length == 0) {
+        if (value == gameRules.foundationValue) {
+          return num + 4;
+        }
+      } else if (this.checkSequenceFound(from, foundation[num + 4][foundation[num + 4].length - 1])) {
+        return num + 4;
+      } else {
+        return -1;
       }
-    } else if (this.checkSequenceFound(from, foundation[num][foundation[num].length - 1])) {
-      return true;
     } else {
-      return false;
+      if (foundation[num].length == 0) {
+        if (value == gameRules.foundationValue) {
+          return num;
+        }
+      } else if (this.checkSequenceFound(from, foundation[num][foundation[num].length - 1])) {
+        return num;
+      } else {
+        return -1;
+      }
     }
+
+
+
   }
   checkSequenceFound(from, to) {
     if (from.value - 1 == to.value && from.suitNum == to.suitNum) {
@@ -344,6 +371,26 @@ class playGame extends Phaser.Scene {
     }
     return false
 
+  }
+  validateStack(index, stack) {
+    if (!gameRules.validateStack) {
+      return true
+    }
+    if (index == tableau[stack].length - 1) {
+      console.log('only one so good')
+      return true
+    }
+    var value = tableau[stack][index].value;
+    var color = tableau[stack][index].color;
+    for (var i = index + 1; i < tableau[stack].length; i++) {
+      console.log('validating...')
+      if (tableau[stack][i].color == color || tableau[stack][i].value + 1 != value || tableau[stack][i].faceDown) {
+        return false
+      }
+      var value = tableau[stack][i].value;
+      var color = tableau[stack][i].color;
+    }
+    return true
   }
   isTopCard(card) {
     if (card.place == 'waste') {

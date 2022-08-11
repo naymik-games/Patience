@@ -2,6 +2,7 @@ class Canfield {
   constructor(scene) {
     this.scene = scene
     this.totalCols = 6
+    this.numDecks = 1
     this.cardSpacingX = 15
     this.cardSpacingY = 15
     this.stock = { num: 1, col: 0, row: 2 }

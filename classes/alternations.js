@@ -1,42 +1,38 @@
-//potential variations: allow free cell, any card fill empty space
-
-//right now has free cell variation turned on
-
-class Scorpion {
+class Alternations {
   constructor(scene) {
     this.scene = scene
-    this.totalCols = 7
-    this.numDecks = 1
-    this.cardSpacingX = 15
+    this.totalCols = 8
+    this.numDecks = 2
+    this.cardSpacingX = 10
     this.cardSpacingY = 15
-    this.stock = { num: 1, col: 0, row: 7 }
-    this.waste = null
-    this.foundation = { num: 4, col: 3, row: 0, build: 'aceUp' }
+    this.stock = { num: 1, col: 7, row: 2 }
+    this.waste = { num: 1, col: 7, row: 3 }
+    this.foundation = { num: 8, col: 0, row: 0, build: 'aceUp' }
     this.tableau = { num: 7, col: 0, row: 1, build: 'colorAlt' }
-    this.free = { num: 3, col: 0, row: 0, build: 'aceUp' }
+    this.validateStack = true
+    this.free = null
     this.reserve = null
-    this.allowRedeal = true
+    this.allowRedeal = false
     this.allowMult = true
-    this.moveKingEmpty = true
+    this.allowFoundCheck = true
+    this.moveKingEmpty = false
     this.moveToEmpty = true
     this.showFoundationLabel = false
     this.foundationValue = 1
-    this.allowFoundCheck = false
-    this.draw = 3
+    this.draw = 1
     this.yOffset = 200
-    this.redealMax = 200
+    this.redealMax = 1
     this.tableauReveal = 50
     this.redealCount = 0
-    this.tabSetUp = [3, 3, 3, 3, 0, 0, 0];
+    this.tabSetUp = [0, 1, 2, 3, 4, 5, 6];
     this.stacksSetup = [[7], [7], [7], [7], [7], [7], [7]];
   }
   deal() {
-
     //set up tableau
     for (var col = 0; col < 7; col++) {
       for (var row = 0; row < this.stacksSetup[col]; row++) {
         var card = d.cards.pop();
-        if (row >= this.tabSetUp[col]) {
+        if (row == 0 || row == 2 || row == 4 || row == 6) {
           var frame = card.index;
           card.faceDown = false
           card.setFrame(frame)
@@ -87,35 +83,45 @@ class Scorpion {
 
     }
   }
-  moveSelected(toCard) {
-    if (toCard.place == 'cell' && this.scene.selection.length == 1) {
-      var fromStack
-      var fromPlace
-      console.log('move to cell')
-      var from = this.scene.selection[0];
-      fromStack = from.stack
-      fromPlace = from.place
-      from.clearTint()
-      //fromStack = from.stack
-      tableau[from.stack].pop()
-      from.stack = toCard.stack
-      from.place = 'free'
-      cells[toCard.stack].push(from)
-      this.scene.children.bringToTop(from)
-      var tween = this.scene.tweens.add({
-        targets: from,
-        x: freePositions[toCard.stack].x,
-        y: (freePositions[toCard.stack].y),
-        duration: 200,
-        onCompleteScope: this.scene,
-        onComplete: function () {
-          this.selection = []
-        }
-      })
-      this.scene.flipStack(fromStack, fromPlace)
-      return
+
+  drawStock() {
+    //console.log('draw')
+    if (this.draw > 1) {
+      if (stock.length < this.draw) {
+        var draw = stock.length;
+      } else {
+        var draw = this.draw;
+      }
+    } else {
+      var draw = this.draw
     }
-    if ((this.scene.selection[0].value + 1 == toCard.value && this.scene.selection[0].suit == toCard.suit) || this.scene.selection[0].value == 13) {
+
+    for (var i = 0; i < draw; i++) {
+      var card = stock.pop();
+      //card.setPosition(15 + 184, 350 - 80.5);
+      this.scene.children.bringToTop(card)
+      card.place = 'waste';
+      waste.push(card);
+      card.flip('f');
+      var tween = this.scene.tweens.add({
+        targets: card,
+        x: wastePosition.x + i * 10,
+        y: wastePosition.y,
+        duration: 300,
+        delay: i * 100
+      })
+      //this.pyramid.push(newStock)
+      //this.drawArray.push(newStock);
+      //this.drawCount--;
+
+    }
+    //console.log(stock.length)
+    if (stock.length == 0 && this.redealCount < this.redealMax && this.allowRedeal) {
+      this.scene.drawPile.setInteractive()
+    }
+  }
+  moveSelected(toCard) {
+    if ((this.scene.selection[0].value + 1 == toCard.value && this.scene.selection[0].color != toCard.color) || toCard.moveEmpty) {
 
       var fromStack
       var fromPlace
@@ -162,27 +168,30 @@ class Scorpion {
       this.scene.selection = []
     }
   }
-  drawStock() {
-    //console.log('draw')
-
-
-    for (var i = 0; i < 3; i++) {
-      var card = stock.pop();
-
-      //card.setPosition(15 + 184, 350 - 80.5);
-      this.scene.children.bringToTop(card)
-      card.place = 'tableau';
-      card.stack = i
-      tableau[i].push(card);
-      card.flip('f');
-      var tween = this.scene.tweens.add({
-        targets: card,
-        x: tabPositions[i].x,
-        y: tabPositions[i].y + (tableau[i].length - 1) * this.tableauReveal,
-        duration: 300,
-        delay: i * 100
-      })
-
+  moveToFoundation(card, stack) {
+    if (card.place == 'tableau') {
+      tableau[card.stack].pop();
+      card.place = 'foundation'
+      this.scene.flipStack(card.stack, 'tableau')
+    } else if (card.place == 'waste') {
+      waste.pop();
+      card.place = 'foundation'
+    } else if (card.place == 'free') {
+      cells[card.stack].pop();
+      card.place = 'foundation'
     }
+    card.stack = stack
+    foundation[stack].push(card);
+    this.scene.children.bringToTop(card)
+    var tween = this.scene.tweens.add({
+      targets: card,
+      x: foundPositions[stack].x,
+      y: foundPositions[stack].y,
+      duration: 200,
+      onCompleteScope: this,
+      onComplete: function () {
+        //this.checkWin()
+      }
+    })
   }
 }

@@ -104,5 +104,10 @@ let games = [
     name: 'Scorpion',
     objective: 'Create four stacks, King down to Ace',
     rules: 'Build tableau piles down in suit. Groups of cards can be moved regardless of any sequence. Any face up card in a tableau can be moved to make a build. All the cards covering it are moved together as a unit. Empty tableaus may be filled with a King or group of cards headed by a King. When you have made all the moves initially available, click on the reserve pile to deal the 3 remaining cards face up to the three leftmost piles.'
+  },
+  {
+    name: 'Alternations',
+    objective: 'Move all cards to the foundation.',
+    rules: 'A card may be added onto a foundation pile if it is one higher than the old top card of the pile and of the same suit.  A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of the opposite color.Cards on the tableau that are not under another card are available for play onto the foundation or any other tableau pile. Empty spaces in the tableau may be filled by any card. Groups of cards in sequence down may be moved from one tableau column to another if the cards are alternately red and black.Each time you click on the stock, one card will be dealt from the stock to the waste. Only one pass through the stock is permitted.'
   }
 ]

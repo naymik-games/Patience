@@ -2,6 +2,7 @@ class Yukon {
   constructor(scene) {
     this.scene = scene
     this.totalCols = 7
+    this.numDecks = 1
     this.cardSpacingX = 15
     this.cardSpacingY = 15
     this.stock = null
@@ -89,7 +90,7 @@ class Yukon {
           this.selection = []
         }
       })
-      this.scene.flipStack(fromStack, fromStack)
+      this.scene.flipStack(fromStack, fromPlace)
       return
     }
     if ((this.scene.selection[0].value + 1 == toCard.value && this.scene.selection[0].color != toCard.color) || this.scene.selection[0].value == 13) {

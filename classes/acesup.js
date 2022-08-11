@@ -1,6 +1,7 @@
 class Aces {
   constructor(scene) {
     this.scene = scene
+    this.numDecks = 1
     this.totalCols = 5
     this.cardSpacingX = 15
     this.cardSpacingY = 15
