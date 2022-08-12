@@ -10,7 +10,7 @@ class Aces {
     this.waste = { num: 1, col: 4, row: 1 }
     this.foundation = null
     this.tableau = { num: 4, col: 0, row: 0, build: 'no' }
-    this.free = null
+    this.free = { num: 1, col: 4, row: 2 }
     this.reserve = null
     this.allowRedeal = false
     this.allowMult = false
@@ -114,45 +114,62 @@ class Aces {
       this.scene.drawPile.setInteractive()
     }
   }
-  moveSelected() {
+  moveSelected2() {
     var from = this.scene.selection[0];
     if (this.scene.isTopCard(from)) {
       for (var i = 0; i < 4; i++) {
         if (from.stack != i && tableau[i].length > 0) {
-          if (tableau[i][tableau[i].length - 1].suit == from.suit) {
-            if (from.value < tableau[i][tableau[i].length - 1].value) {
-              var fromStack = from.stack
-              var fromPlace = from.place
+          if (tableau[i][tableau[i].length - 1].suit == from.suit && from.value < tableau[i][tableau[i].length - 1].value) {
 
-              if (from.place == 'tableau') {
-                tableau[from.stack].pop()
-              }
+            var fromStack = from.stack
+            var fromPlace = from.place
 
-              from.place = 'waste'
-
-              waste.push(from);
-
-              this.scene.children.bringToTop(from)
-              // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
-              var tween = this.scene.tweens.add({
-                targets: from,
-                x: wastePosition.x,
-                y: wastePosition.y,
-                duration: 200,
-                onCompleteScope: this.scene,
-                onComplete: function () {
-
-                }
-              })
-              this.scene.selection = []
-              this.checkWin()
-              return;
-
-            } else {
-              this.scene.selection = []
+            if (from.place == 'tableau') {
+              tableau[from.stack].pop()
             }
-          } else {
+
+            from.place = 'waste'
+
+            waste.push(from);
+
+            this.scene.children.bringToTop(from)
+            // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
+            var tween = this.scene.tweens.add({
+              targets: from,
+              x: wastePosition.x,
+              y: wastePosition.y,
+              duration: 200,
+              onCompleteScope: this.scene,
+              onComplete: function () {
+
+              }
+            })
             this.scene.selection = []
+            this.checkWin()
+            return;
+
+
+          } else {
+            tableau[from.stack].pop()
+            from.stack = 0
+            from.place = 'free'
+
+            cells[0].push(from);
+
+            this.scene.children.bringToTop(from)
+            // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
+            var tween = this.scene.tweens.add({
+              targets: from,
+              x: freePositions[0].x,
+              y: freePositions[0].y,
+              duration: 200,
+              onCompleteScope: this.scene,
+              onComplete: function () {
+
+              }
+            })
+            this.scene.selection = []
+            return;
           }
         } else {
           this.scene.selection = []
@@ -212,5 +229,142 @@ class Aces {
     localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
     alert('win!')
   }
+  //////save///
+  moveSelected() {
+    var from = this.scene.selection[0];
+
+    if (from.place == 'free') {
+      for (var i = 0; i < 4; i++) {
+        if (tableau[i].length == 0) {
+          cells[0].pop()
+          from.stack = i
+          from.place = 'tableau'
+
+          tableau[i].push(from);
+
+          this.scene.children.bringToTop(from)
+          // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
+          var tween = this.scene.tweens.add({
+            targets: from,
+            x: tabPositions[i].x,
+            y: tabPositions[i].y,
+            duration: 200,
+            onCompleteScope: this.scene,
+            onComplete: function () {
+
+            }
+          })
+          this.scene.selection = []
+          return;
+        }
+      }
+    }
+
+
+
+
+
+    if (this.scene.isTopCard(from)) {
+      for (var i = 0; i < 4; i++) {
+        if (from.stack != i && tableau[i].length > 0) {
+          if (tableau[i][tableau[i].length - 1].suit == from.suit) {
+            if (from.value < tableau[i][tableau[i].length - 1].value) {
+              var fromStack = from.stack
+              var fromPlace = from.place
+
+              if (from.place == 'tableau') {
+                tableau[from.stack].pop()
+              } else if (from.place == 'free') {
+                cells[from.stack].pop()
+              }
+
+              from.place = 'waste'
+
+              waste.push(from);
+
+              this.scene.children.bringToTop(from)
+              // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
+              var tween = this.scene.tweens.add({
+                targets: from,
+                x: wastePosition.x,
+                y: wastePosition.y,
+                duration: 200,
+                onCompleteScope: this.scene,
+                onComplete: function () {
+
+                }
+              })
+              this.scene.selection = []
+              this.checkWin()
+              return;
+
+            } else {
+              this.scene.selection = []
+            }
+          } else {
+            this.scene.selection = []
+          }
+        } else {
+          this.scene.selection = []
+        }
+      }//end for
+      for (var i = 0; i < 4; i++) {
+        if (from.stack != i && tableau[i].length == 0) {
+
+          tableau[from.stack].pop()
+          from.stack = i
+
+
+          tableau[i].push(from);
+
+          this.scene.children.bringToTop(from)
+          // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
+          var tween = this.scene.tweens.add({
+            targets: from,
+            x: tabPositions[i].x,
+            y: tabPositions[i].y,
+            duration: 200,
+            onCompleteScope: this.scene,
+            onComplete: function () {
+
+            }
+          })
+          this.scene.selection = []
+          return;
+        } else if (cells[0].length == 0) {
+          tableau[from.stack].pop()
+          from.stack = 0
+          from.place = 'free'
+
+          cells[0].push(from);
+
+          this.scene.children.bringToTop(from)
+          // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
+          var tween = this.scene.tweens.add({
+            targets: from,
+            x: freePositions[0].x,
+            y: freePositions[0].y,
+            duration: 200,
+            onCompleteScope: this.scene,
+            onComplete: function () {
+
+            }
+          })
+          this.scene.selection = []
+          return;
+        }
+
+      }
+
+
+    } else {
+      this.scene.selection = []
+    }
+
+
+
+
+  }//end move sle
+  ///end save////
 
 }

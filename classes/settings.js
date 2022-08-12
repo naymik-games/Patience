@@ -66,7 +66,7 @@ let games = [
   {
     name: 'Klondike',
     objective: 'To build the foundations up in suit to kings.',
-    rules: 'The top cards of tableau piles and waste pile are available to play. You may build tableau piles down in sequence and alternating color. One card or group of cards in the proper sequence can be moved from pile to pile. If, during play, any closed cards become the top card of a stack, it turns over. Empty tableaus may be filled with a King or group of cards headed with a King.\nWhen you have made all the moves initially available, begin turning over cards from the stock pile. 3 cards at a time are turned over from the Stock.'
+    rules: 'The top cards of tableau piles and waste pile are available to play. \nYou may build tableau piles down in sequence and [b]alternating color[/b]. \nOne card or group of cards in the proper sequence can be moved from pile to pile. \nIf, during play, any closed cards become the top card of a stack, it turns over. \nEmpty tableaus may be filled with a King or group of cards headed with a King.\nWhen you have made all the moves initially available, begin turning over cards from the stock pile. 3 cards at a time are turned over from the Stock.'
   },
   {
     name: 'Yukon',
@@ -85,8 +85,8 @@ let games = [
   },
   {
     name: 'Aces Up',
-    objective: 'Transfer all the cards from the seven columns to the single waste pile as quickly as possible.',
-    rules: 'A single, exposed card from one of the seven columns may be transferred to the waste pile if it follows either an ascending or descending sequence regardless of suit. Sequences may turn the corner with Kings building on Aces and Aces building on Kings. When no more cards from the columns can be transferred to the waste pile, a card from the stock is dealt to the waste pile and building resumes.'
+    objective: 'Remove all cards from the tableau except for the Aces',
+    rules: '[b]Tableau:[/b]Select the lowest rank card from two or more cards of the same suit to remove it.\nSelect a single card to move it to an empty space, if available.\nSelect the stock to deal a card to the top of each column.\n There are no redeals.'
   },
   {
     name: 'Cruel',

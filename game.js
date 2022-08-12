@@ -235,6 +235,9 @@ class playGame extends Phaser.Scene {
       this.selection.push(card);
       gameRules.moveSelected();
 
+    } else if (!card.faceDown && card.place == 'free') {
+      this.selection.push(card);
+      gameRules.moveSelected();
     }
   }
   press(pointer, card) {
