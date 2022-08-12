@@ -48,6 +48,7 @@ var filesToCache = [
   '/assets/sprites/cards_draw.png',
   '/assets/sprites/cards_minimal.png',
   '/assets/sprites/cards_mobile.png',
+  '/assets/sprites/cards_thin.png',
 
   '/assets/sprites/backs.png',
 

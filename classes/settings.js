@@ -59,6 +59,10 @@ let decks = [
   {
     key: 'cards_mobile',
     name: 'Mobile'
+  },
+  {
+    key: 'cards_thin',
+    name: 'Thin'
   }
 ]
 let onGame = 1

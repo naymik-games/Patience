@@ -254,6 +254,7 @@ class Aces {
 
             }
           })
+          this.checkWin()
           this.scene.selection = []
           return;
         }
@@ -267,7 +268,7 @@ class Aces {
     if (this.scene.isTopCard(from)) {
       for (var i = 0; i < 4; i++) {
         if (from.stack != i && tableau[i].length > 0) {
-          if (tableau[i][tableau[i].length - 1].suit == from.suit) {
+          if (tableau[i][tableau[i].length - 1].suit == from.suit && from.place != 'free') {
             if (from.value < tableau[i][tableau[i].length - 1].value) {
               var fromStack = from.stack
               var fromPlace = from.place
