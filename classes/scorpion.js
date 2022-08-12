@@ -151,6 +151,7 @@ class Scorpion {
 
       }
       this.scene.flipStack(fromStack, fromPlace)
+      this.checkWin()
       /*  if (tableau[fromStack][tableau[fromStack].length - 1].faceDown) {
          tableau[fromStack][tableau[fromStack].length - 1].flip('f')
        } */
@@ -188,7 +189,7 @@ class Scorpion {
   checkWin() {
     var fullStacks = []
     for (var f = 0; f < this.tableau.num; f++) {
-      if (foundation[f].length == 13) {
+      if (tableau[f].length == 13) {
         fullStacks.push(f)
       }
     }

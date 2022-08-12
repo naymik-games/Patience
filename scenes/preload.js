@@ -75,6 +75,7 @@ class preloadGame extends Phaser.Scene {
 
     //this.load.image("particle", "assets/sprites/particle.png");
     this.load.bitmapFont('topaz', 'assets/fonts/topaz.png', 'assets/fonts/topaz.xml');
+    this.load.bitmapFont('lato', 'assets/fonts/lato_0.png', 'assets/fonts/lato.xml');
     this.load.spritesheet("icons", "assets/sprites/icons.png", {
       frameWidth: 96,
       frameHeight: 96

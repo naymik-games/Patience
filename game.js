@@ -65,6 +65,10 @@ class playGame extends Phaser.Scene {
     } else if (onGame == 9) {
       gameRules = new Spiderette(this)
     }
+
+    gameProgress[onGame][0]++
+    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
+
     cardKey = decks[onDeck].key
     var frame = this.textures.getFrame(cardKey, 0);
 

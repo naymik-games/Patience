@@ -119,8 +119,7 @@ class startGame extends Phaser.Scene {
 
     if (obj.name) {
       onGame = obj.num;
-      gameProgress[onGame][0]++
-      localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
+
       this.scene.start('playGame');
       this.scene.launch('UI');
     }
