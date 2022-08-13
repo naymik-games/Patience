@@ -116,5 +116,10 @@ let games = [
     name: 'Spiderette',
     objective: 'Sort all cards on the tableau downwards in the same suit',
     rules: 'Single cards may never be moved to the foundation. Seven tableau piles with one card in the first pile, two cards in the second, three in the third, and so on. The top card in each pile is dealt face up, all others are face down. A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of any suit.Thus, the card that could be played on a five would be a four of any suit. Cards on the tableau that are not under another card are available for play onto any other tableau pile. Empty spaces in the tableau may be filled by any card. Groups of cards in sequence down may be moved from one tableau column to another if all cards are of the same suit. Each time you click on the stock, a card will be dealt on top of each tableau pile. '
+  },
+  {
+    name: 'Pyramid',
+    objective: 'Sort all cards on the tableau downwards in the same suit',
+    rules: 'Single cards may never be moved to the foundation. Seven tableau piles with one card in the first pile, two cards in the second, three in the third, and so on. The top card in each pile is dealt face up, all others are face down. A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of any suit.Thus, the card that could be played on a five would be a four of any suit. Cards on the tableau that are not under another card are available for play onto any other tableau pile. Empty spaces in the tableau may be filled by any card. Groups of cards in sequence down may be moved from one tableau column to another if all cards are of the same suit. Each time you click on the stock, a card will be dealt on top of each tableau pile. '
   }
 ]

@@ -55,6 +55,7 @@ class Golf {
 
     //set up stock
     var length = d.cards.length
+    var count = d.cards.length
     for (var i = 0; i < length; i++) {
       var card = d.cards.pop();
       var frame = onBack;
@@ -74,6 +75,10 @@ class Golf {
         delay: 1500,
         onCompleteScope: this,
         onComplete: function () {
+          count--
+          if (count == 0) {
+            this.drawStock()
+          }
 
         }
       });

@@ -219,6 +219,7 @@ class Klondike {
         this.checkWin()
       }
     })
+
   }
 
   moveToEmptyStack(card, stack) {

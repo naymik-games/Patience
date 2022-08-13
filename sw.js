@@ -27,6 +27,7 @@ var filesToCache = [
   '/classes/scorpion.js',
   '/classes/alternations.js',
   '/classes/spiderette.js',
+  '/classes/pyramid.js',
   '/classes/carGame.js',
 
 

@@ -64,6 +64,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Alternations(this)
     } else if (onGame == 9) {
       gameRules = new Spiderette(this)
+    } else if (onGame == 10) {
+      gameRules = new Pyramid(this)
     }
 
     gameProgress[onGame][0]++
@@ -242,8 +244,8 @@ class playGame extends Phaser.Scene {
   }
   press(pointer, card) {
     // console.log(card.place)
-    var debug = 'Place ' + card.place + ', Stack ' + card.stack + ', Suit ' + card.suit + ', Value ' + card.value + ', Index ' + card.index + ', SuitNum ' + card.suitNum + ', foundNum ' + card.foundNum
-    console.log('selection length' + this.selection.length)
+    var debug = 'Place ' + card.place + ', Stack ' + card.stack + ', Slot ' + card.slot + ', Suit ' + card.suit + ', Value ' + card.value + ', Index ' + card.index + ', SuitNum ' + card.suitNum + ', foundNum ' + card.foundNum
+    //console.log('selection length' + this.selection.length)
     console.log(debug)
     if (card.place == 'drawPile') {
       //console.log("restock")
@@ -254,17 +256,26 @@ class playGame extends Phaser.Scene {
     if (card.faceDown && card.place == 'stock') {
 
       gameRules.drawStock()
+      return
     }
-    if (!card.faceDown && (card.place == 'tableau' || card.place == 'waste' || card.place == 'cell' || card.place == 'free' || card.place == 'reserve')) {
+    if (gameRules.stockInPlay && card.place == 'stock' && this.selection.length === 0) {
+
+      gameRules.drawStock()
+      return
+    }
+    if (!card.faceDown && (card.place == 'tableau' || card.place == 'waste' || card.place == 'cell' || card.place == 'free' || card.place == 'reserve' || card.place == 'stock')) {
       //FIRST CLICK
       if (this.selection.length === 0) {
         if (card.place == 'cell') { return }
         //check if card can go to foundation
-        var foundationCheck = this.checkFoundation(card.suitNum, card.value, card)
-        if (foundationCheck > -1 && (this.isTopCard(card) && gameRules.allowFoundCheck || card.place == 'waste')) {
-          gameRules.moveToFoundation(card, foundationCheck)
-          return
+        if (gameRules.allowFoundCheck) {
+          var foundationCheck = this.checkFoundation(card.suitNum, card.value, card)
+          if (foundationCheck > -1 && (this.isTopCard(card) || card.place == 'waste')) {
+            gameRules.moveToFoundation(card, foundationCheck)
+            return
+          }
         }
+
         //if card is in tableau and you are allowed to secelect multiple
         if (gameRules.topSelectOnly && !this.isTopCard(card)) { return }
         if (card.place == 'tableau' && gameRules.allowMult) {
@@ -299,10 +310,13 @@ class playGame extends Phaser.Scene {
           }
         } else {
           //if card is in tableau and you are not allowed multiple select card then check for auto move king if allowed
+
           this.selection.push(card);
-          console.log(this.selection)
           card.setTint(0x00ff00);
-          if (card.value == 13 && gameRules.moveKingEmpty && gameRules.moveToEmpty) {
+          if (card.value == 13 && gameRules.moveKingToFoundation) {
+            gameRules.moveToFoundation(card)
+
+          } else if (card.value == 13 && gameRules.moveKingEmpty && gameRules.moveToEmpty) {
             var temp = this.findEmptyStack();
             if (temp > -1) {
               var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }
@@ -325,8 +339,11 @@ class playGame extends Phaser.Scene {
       } else {
         //SECOND CLICK
         if (this.selection.length > 0) {
-          // console.log('move cards')
-
+          console.log('second click')
+          if (gameRules.allowDoubleSelection && this.selection.length == 1) {
+            console.log('adding second card...')
+            this.selection.push(card)
+          }
           gameRules.moveSelected(card)
         }
         /*   for (var i = 0; i < this.selection.length; i++) {
@@ -336,7 +353,7 @@ class playGame extends Phaser.Scene {
           this.selection = [] */
       }
     }
-    console.log(this.selection)
+
   }
   // foundation[num][foundation[num].length - 1].suitNum == num && foundation[num][foundation[num].length - 1].value + 1 == value
   checkFoundation(num, value, from) {
