@@ -235,27 +235,30 @@ class Pyramid {
     this.scene.selection = []
   }
   validPlay() {
-    console.log('checking valid play...')
-
-    for (var i = 0; i < this.scene.selection.length; i++) {
-      var card = this.scene.selection[i]
-      if (card.place == 'tableau') {
-        //console.log(tableau[card.stack + 1][card.slot])
-        if (typeof tableau[card.stack + 1] != "undefined" &&
-          (typeof tableau[card.stack + 1][card.slot] != "undefined" || typeof tableau[card.stack + 1][card.slot + 1] != "undefined")) {
-
-          console.log('card stack ' + card.stack + ', card slot ' + card.slot)
-          return false
-        }
-        /* if (typeof tableau[card.stack + 1] != "undefined" &&
-          (typeof tableau[card.stack + 1][card.slot] != "undefined" || typeof tableau[card.stack + 1][card.slot + 1] != "undefined")) {
-
-
-          return false
-        } */
-      }
+    if (this.checkCard(this.scene.selection[0]) && this.checkCard(this.scene.selection[1])) {
+      return true
     }
-    return true
+    return false
+
+  }
+  checkCard(card) {
+    if (card.place == 'tableau') {
+      if (typeof tableau[card.stack + 1] != "undefined" &&
+        (typeof tableau[card.stack + 1][card.slot] != "undefined" || typeof tableau[card.stack + 1][card.slot + 1] != "undefined")) {
+
+        console.log('card stack ' + card.stack + ', card slot ' + card.slot)
+        return false
+      }
+      return true
+      /* if (typeof tableau[card.stack + 1] != "undefined" &&
+        (typeof tableau[card.stack + 1][card.slot] != "undefined" || typeof tableau[card.stack + 1][card.slot + 1] != "undefined")) {
+
+
+        return false
+      } */
+    } else {
+      return true
+    }
   }
   checkWin() {
     if (foundation.length != 51) {
@@ -271,3 +274,28 @@ class Pyramid {
     this.scene.scene.stop('UI')
   }
 }
+
+
+/* validPlay() {
+  console.log('checking valid play...')
+
+  for (var i = 0; i < this.scene.selection.length; i++) {
+    var card = this.scene.selection[i]
+    if (card.place == 'tableau') {
+      //console.log(tableau[card.stack + 1][card.slot])
+      if (typeof tableau[card.stack + 1] != "undefined" &&
+        (typeof tableau[card.stack + 1][card.slot] != "undefined" || typeof tableau[card.stack + 1][card.slot + 1] != "undefined")) {
+
+        console.log('card stack ' + card.stack + ', card slot ' + card.slot)
+        return false
+      }
+      /* if (typeof tableau[card.stack + 1] != "undefined" &&
+        (typeof tableau[card.stack + 1][card.slot] != "undefined" || typeof tableau[card.stack + 1][card.slot + 1] != "undefined")) {
+
+
+        return false
+      } 
+    }
+  }
+return true
+} */
