@@ -310,6 +310,11 @@ class playGame extends Phaser.Scene {
           }
         } else {
           //if card is in tableau and you are not allowed multiple select card then check for auto move king if allowed
+          if (onGame == 10) {
+            if (!gameRules.checkCard(card)) {
+              return
+            }
+          }
 
           this.selection.push(card);
           card.setTint(0x00ff00);
@@ -342,6 +347,11 @@ class playGame extends Phaser.Scene {
           console.log('second click')
           if (gameRules.allowDoubleSelection && this.selection.length == 1) {
             console.log('adding second card...')
+            if (onGame == 10) {
+              if (!gameRules.checkCard(card)) {
+                return
+              }
+            }
             this.selection.push(card)
           }
           gameRules.moveSelected(card)

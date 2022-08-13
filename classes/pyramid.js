@@ -162,7 +162,7 @@ class Pyramid {
   }
   moveSelected(toCard) {
     console.log(this.scene.selection)
-    if (this.scene.selection[0].value + this.scene.selection[1].value == 13 && this.validPlay()) {
+    if (this.scene.selection[0].value + this.scene.selection[1].value == 13) {
       var fromStack
       var fromPlace
       for (var i = 0; i < this.scene.selection.length; i++) {
@@ -171,7 +171,9 @@ class Pyramid {
         fromStack = from.stack
         fromPlace = from.place
         if (from.place == 'tableau') {
-          tableau[from.stack].pop()
+          var stackIndex = tableau[from.stack].findIndex(x => x.index === from.index);
+          var placeHolder = { slot: from.slot, stack: from.stack, value: -1, place: tableau }
+          tableau[from.stack].splice(stackIndex, 1, placeHolder)
         } else if (from.place == 'waste') {
           waste.pop()
         } else if (from.place == 'stock') {
@@ -198,6 +200,7 @@ class Pyramid {
 
 
       }
+      console.log(tableau)
     } else {
       for (var i = 0; i < this.scene.selection.length; i++) {
         var from = this.scene.selection[i];
@@ -243,13 +246,22 @@ class Pyramid {
   }
   checkCard(card) {
     if (card.place == 'tableau') {
-      if (typeof tableau[card.stack + 1] != "undefined" &&
+      if (typeof tableau[card.stack + 1] == 'undefined') { return true }
+
+      if ((tableau[card.stack + 1][card.slot].value != -1 || tableau[card.stack + 1][card.slot + 1].value != -1)) {
+
+        console.log('card stack ' + card.stack + ', card slot ' + card.slot)
+        console.log(tableau[card.stack + 1][card.slot])
+        return false
+      }
+      return true
+      /* if (typeof tableau[card.stack + 1] != "undefined" &&
         (typeof tableau[card.stack + 1][card.slot] != "undefined" || typeof tableau[card.stack + 1][card.slot + 1] != "undefined")) {
 
         console.log('card stack ' + card.stack + ', card slot ' + card.slot)
         return false
       }
-      return true
+      return true */
       /* if (typeof tableau[card.stack + 1] != "undefined" &&
         (typeof tableau[card.stack + 1][card.slot] != "undefined" || typeof tableau[card.stack + 1][card.slot + 1] != "undefined")) {
 
