@@ -225,9 +225,7 @@ class Aces {
     } else {
       return
     }
-    gameProgress[onGame][1]++
-    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
-    alert('win!')
+    this.scene.endGame()
   }
   //////save///
   moveSelected() {

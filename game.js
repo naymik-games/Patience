@@ -66,6 +66,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Spiderette(this)
     } else if (onGame == 10) {
       gameRules = new Pyramid(this)
+    } else if (onGame == 11) {
+      gameRules = new Montecarlo(this)
     }
 
     gameProgress[onGame][0]++
@@ -163,6 +165,16 @@ class playGame extends Phaser.Scene {
             tableau.push(new Array())
           }
         }
+      } else if (onGame == 11) {
+        for (var row = 0; row < 5; row++) {
+          for (var col = 0; col < 5; col++) {
+            var x = this.cardSpacing + this.cardWidth / 2 + col * (this.cardWidth + this.cardSpacing)
+            var y = (gameRules.yOffset + this.cardSpacingY) + row * (this.cardHeight + this.cardSpacingY)
+            tabPositions.push({ x: x, y: y })
+            var tab = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setInteractive().setDepth(0).setAlpha(.5);
+            tableau.push(new Array())
+          }
+        }
       } else {
 
         for (var t = gameRules.tableau.col; t < gameRules.tableau.col + gameRules.tableau.num; t++) {
@@ -244,12 +256,17 @@ class playGame extends Phaser.Scene {
   }
   press(pointer, card) {
     // console.log(card.place)
-    var debug = 'Place ' + card.place + ', Stack ' + card.stack + ', Slot ' + card.slot + ', Suit ' + card.suit + ', Value ' + card.value + ', Index ' + card.index + ', SuitNum ' + card.suitNum + ', foundNum ' + card.foundNum
+    var debug = 'Place ' + card.place + ', Stack ' + card.stack + ', Slot ' + card.slot + ', Suit ' + card.suit + ', Value ' + card.value + ', Index ' + card.index + ', SuitNum ' + card.suitNum + ', col ' + card.col
     //console.log('selection length' + this.selection.length)
     console.log(debug)
     if (card.place == 'drawPile') {
       //console.log("restock")
-      gameRules.redeal()
+      if (onGame == 11) {
+        gameRules.drawStock()
+      } else {
+        gameRules.redeal()
+      }
+
     }
     if (card.faceDown && card.place == 'tableau') { return }
 
@@ -354,6 +371,7 @@ class playGame extends Phaser.Scene {
             }
             this.selection.push(card)
           }
+          console.log(this.selection)
           gameRules.moveSelected(card)
         }
         /*   for (var i = 0; i < this.selection.length; i++) {
@@ -502,7 +520,14 @@ class playGame extends Phaser.Scene {
     }
     return stack;
   }
-
+  endGame() {
+    gameProgress[onGame][1]++
+    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
+    alert('win!')
+    this.scene.scene.start('startGame')
+    this.scene.scene.stop('playGame')
+    this.scene.scene.stop('UI')
+  }
   addScore() {
     this.events.emit('score');
   }
