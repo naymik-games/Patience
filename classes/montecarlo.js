@@ -1,7 +1,7 @@
 class Montecarlo {
   constructor(scene) {
     this.scene = scene
-    this.totalCols = 5
+    this.totalCols = 6
     this.numDecks = 1
     this.cardSpacingX = 15
     this.cardSpacingY = 15

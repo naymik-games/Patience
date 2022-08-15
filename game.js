@@ -68,7 +68,10 @@ class playGame extends Phaser.Scene {
       gameRules = new Pyramid(this)
     } else if (onGame == 11) {
       gameRules = new Montecarlo(this)
+    } else if (onGame == 12) {
+      gameRules = new Missmilligan(this)
     }
+
 
     gameProgress[onGame][0]++
     localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
@@ -298,7 +301,7 @@ class playGame extends Phaser.Scene {
         if (card.place == 'tableau' && gameRules.allowMult) {
           var stackIndex = tableau[card.stack].findIndex(x => x.index === card.index);
           console.log('stack index ' + stackIndex)
-          if (!this.validateStack(stackIndex, card.stack)) {
+          if (!this.validateStack(tableau, stackIndex, card.stack)) {
             return
           }
           for (var i = stackIndex; i < tableau[card.stack].length; i++) {
@@ -324,6 +327,35 @@ class playGame extends Phaser.Scene {
 
             }
             return
+          }
+        } else if (card.place == 'free' && gameRules.freeMult) {
+          //if free cell allow multiple cards, only select from bootom card down
+          if (this.isBottomCard(card)) {
+            console.log('correct')
+            for (var i = 0; i < cells[card.stack].length; i++) {
+              var car = cells[card.stack][i];
+              car.setTint(0x00ff00);
+              this.selection.push(car);
+
+            }
+            //if auto move king, check and do that
+            if (card.value == 13 && gameRules.moveKingEmpty) {
+              var temp = this.findEmptyStack();
+              if (temp > -1) {
+                var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }
+                gameRules.moveSelected(toCard);
+
+              }
+              return
+            } else if (!gameRules.moveKingEmpty) {
+              var temp = this.findEmptyStack();
+              if (temp > -1) {
+                var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }
+                gameRules.moveSelected(toCard);
+
+              }
+              return
+            }
           }
         } else {
           //if card is in tableau and you are not allowed multiple select card then check for auto move king if allowed
@@ -426,36 +458,36 @@ class playGame extends Phaser.Scene {
     return false
 
   }
-  validateStack(index, stack) {
+  validateStack(place, index, stack) {
     if (!gameRules.validateStack) {
       return true
     }
-    if (index == tableau[stack].length - 1) {
+    if (index == place[stack].length - 1) {
       console.log('only one so good')
       return true
     }
 
     if (gameRules.tableau.build == 'suit') {
-      var value = tableau[stack][index].value;
-      var suit = tableau[stack][index].suit;
-      for (var i = index + 1; i < tableau[stack].length; i++) {
+      var value = place[stack][index].value;
+      var suit = place[stack][index].suit;
+      for (var i = index + 1; i < place[stack].length; i++) {
         console.log('validating...')
-        if (tableau[stack][i].suit != suit || tableau[stack][i].value + 1 != value || tableau[stack][i].faceDown) {
+        if (place[stack][i].suit != suit || place[stack][i].value + 1 != value || place[stack][i].faceDown) {
           return false
         }
-        var value = tableau[stack][i].value;
-        var suit = tableau[stack][i].suit;
+        var value = place[stack][i].value;
+        var suit = place[stack][i].suit;
       }
     } else {
-      var value = tableau[stack][index].value;
-      var color = tableau[stack][index].color;
-      for (var i = index + 1; i < tableau[stack].length; i++) {
+      var value = place[stack][index].value;
+      var color = place[stack][index].color;
+      for (var i = index + 1; i < place[stack].length; i++) {
         console.log('validating...')
-        if (tableau[stack][i].color == color || tableau[stack][i].value + 1 != value || tableau[stack][i].faceDown) {
+        if (place[stack][i].color == color || place[stack][i].value + 1 != value || place[stack][i].faceDown) {
           return false
         }
-        var value = tableau[stack][i].value;
-        var color = tableau[stack][i].color;
+        var value = place[stack][i].value;
+        var color = place[stack][i].color;
       }
     }
 
@@ -480,6 +512,29 @@ class playGame extends Phaser.Scene {
     } else if (card.place == 'reserve') {
       var index = reserve.findIndex(x => x.index === card.index);
       if (index == reserve.length - 1) {
+        return true
+      }
+    }
+  }
+  isBottomCard(card) {
+    if (card.place == 'waste') {
+      var index = waste.findIndex(x => x.index === card.index);
+      if (index == 0) {
+        return true
+      }
+    } else if (card.place == 'tableau') {
+      var index = tableau[card.stack].findIndex(x => x.index === card.index);
+      if (index == 0) {
+        return true
+      }
+    } else if (card.place == 'free') {
+      var index = cells[card.stack].findIndex(x => x.index === card.index);
+      if (index == 0) {
+        return true
+      }
+    } else if (card.place == 'reserve') {
+      var index = reserve.findIndex(x => x.index === card.index);
+      if (index == 0) {
         return true
       }
     }
