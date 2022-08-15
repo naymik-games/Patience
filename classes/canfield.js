@@ -333,11 +333,6 @@ class Canfield {
         return
       }
     }
-    gameProgress[onGame][1]++
-    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
-    //gameData[currentGameNum].wins++;
-    //this.saveData();
-
-    alert('win!')
+    this.scene.endGame()
   }
 }

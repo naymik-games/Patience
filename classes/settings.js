@@ -119,17 +119,17 @@ let games = [
   },
   {
     name: 'Pyramid',
-    objective: 'Sort all cards on the tableau downwards in the same suit',
-    rules: 'Single cards may never be moved to the foundation. Seven tableau piles with one card in the first pile, two cards in the second, three in the third, and so on. The top card in each pile is dealt face up, all others are face down. A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of any suit.Thus, the card that could be played on a five would be a four of any suit. Cards on the tableau that are not under another card are available for play onto any other tableau pile. Empty spaces in the tableau may be filled by any card. Groups of cards in sequence down may be moved from one tableau column to another if all cards are of the same suit. Each time you click on the stock, a card will be dealt on top of each tableau pile. '
+    objective: 'You win if you successfully remove all cards',
+    rules: 'Remove pairs of cards that [color=red]add to thirteen[/color]. Kings can be removed singly. Cards on the pyramid that are not under another card are available for play. Each time you click on the stock, one card will be dealt from the stock to the waste. The top card of the stock is face up and is available for pairing with cards on the waste or elsewhere so long as you select the other card first. Three passes through the stock are permitted. The top card of the waste is available for play.'
   },
   {
     name: 'Monte Carlo',
-    objective: 'Sort all cards on the tableau downwards in the same suit',
-    rules: 'Single cards may never be moved to the foundation. Seven tableau piles with one card in the first pile, two cards in the second, three in the third, and so on. The top card in each pile is dealt face up, all others are face down. A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of any suit.Thus, the card that could be played on a five would be a four of any suit. Cards on the tableau that are not under another card are available for play onto any other tableau pile. Empty spaces in the tableau may be filled by any card. Groups of cards in sequence down may be moved from one tableau column to another if all cards are of the same suit. Each time you click on the stock, a card will be dealt on top of each tableau pile. '
+    objective: 'To discard all the cards in pairs by suit.',
+    rules: '[b]Tableau[/b] Kings can be removed immediatly. Ajacent cards of the same rank can be removed. When no moves are left, select the stock, and the tableau will condensed and any remaining stock cards will be dealt to fill in the empty spaces.'
   },
   {
     name: 'Miss Milligan',
-    objective: 'Sort all cards on the tableau downwards in the same suit',
-    rules: 'Single cards may never be moved to the foundation. Seven tableau piles with one card in the first pile, two cards in the second, three in the third, and so on. The top card in each pile is dealt face up, all others are face down. A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of any suit.Thus, the card that could be played on a five would be a four of any suit. Cards on the tableau that are not under another card are available for play onto any other tableau pile. Empty spaces in the tableau may be filled by any card. Groups of cards in sequence down may be moved from one tableau column to another if all cards are of the same suit. Each time you click on the stock, a card will be dealt on top of each tableau pile. '
+    objective: 'Move all cards to the foundation.',
+    rules: '[b]Foundation[/b]Any ace may be moved to any empty pile in the foundation.\n[b]Tableau [/b]A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of the [color=red]opposite color[/color]. Cards on the tableau that are not under another card are available for play onto the foundation or any other tableau pile.Empty spaces in the tableau may be filled by kings only. Groups of cards in sequence down may be moved from one tableau column to another if the cards are alternately red and black.\n [b]Stock [/b]Each time you click on the stock, a card will be dealt on top of each tableau pile, unitil the stock is empty.\n[b]Free Cell [/b] A single card or stack of cards can be temporarily stored in the free cell. If there is a stack of cards in the pocket then you can not take cards out individually. Only the complete sequence can be removed.'
   }
 ]

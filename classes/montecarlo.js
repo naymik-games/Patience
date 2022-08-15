@@ -258,16 +258,11 @@ class Montecarlo {
     console.log(tableau) */
   }
   checkWin() {
-    if (foundation.length != 51) {
+    console.log('checking win...')
+    if (foundation[0].length != 52) {
       return
     }
-    //gameData[currentGameNum].wins++;
-    //this.saveData();
-    gameProgress[onGame][1]++
-    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
-    alert('win!')
-    this.scene.scene.start('startGame')
-    this.scene.scene.stop('playGame')
-    this.scene.scene.stop('UI')
+
+    this.scene.endGame()
   }
 }

@@ -170,14 +170,11 @@ class Spiderette {
       }
     }
     if (fullStacks.length == 4) {
-      gameProgress[onGame][1]++
-      localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
-      alert('win!')
+      this.scene.endGame()
     } else {
       return
     }
-    //gameData[currentGameNum].wins++;
-    //this.saveData();
+
 
   }
 }

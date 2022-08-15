@@ -5,7 +5,7 @@ class Missmilligan {
     this.numDecks = 2
     this.cardSpacingX = 10
     this.cardSpacingY = 15
-    this.stock = { num: 1, col: 1, row: 7 }
+    this.stock = { num: 1, col: 0, row: 7 }
     this.waste = null
     this.foundation = { num: 8, col: 0, row: 0, build: 'aceUp' }
     this.tableau = { num: 8, col: 0, row: 1, build: 'altColor' }
@@ -222,10 +222,6 @@ class Missmilligan {
         return
       }
     }
-    //gameData[currentGameNum].wins++;
-    //this.saveData();
-    gameProgress[onGame][1]++
-    localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
-    alert('win!')
+    this.scene.endGame()
   }
 }
