@@ -91,7 +91,7 @@ class Scorpion {
     if (toCard.place == 'cell' && this.scene.selection.length == 1) {
       var fromStack
       var fromPlace
-      console.log('move to cell')
+      //console.log('move to cell')
       var from = this.scene.selection[0];
       fromStack = from.stack
       fromPlace = from.place
@@ -134,7 +134,7 @@ class Scorpion {
         from.place = toCard.place
         var stackLength = tableau[toCard.stack].length
         tableau[toCard.stack].push(from);
-        console.log(stackLength)
+        //console.log(stackLength)
         this.scene.children.bringToTop(from)
         // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
         var tween = this.scene.tweens.add({

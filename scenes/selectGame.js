@@ -7,45 +7,45 @@ class selectGame extends Phaser.Scene {
 
   }
   create() {
-	  this.cameras.main.setBackgroundColor(0xf7eac6);
+    this.cameras.main.setBackgroundColor(0xf7eac6);
     this.startGroup = onGroup;
     this.playText = this.add.bitmapText(game.config.width / 2, 75, 'atari', 'NEXT >', 60).setOrigin(.5, .5).setTint(0xc76210).setInteractive();
     this.playText.level = -1;
     /*  this.playText.on('pointerdown', function(){
         this.scene.start("PlayGame");
       }, this);*/
-this.swipe = false;
+    this.swipe = false;
 
     this.showGroup(this.startGroup);
-    this.return = this.add.image(game.config.width / 2, 1550,'menu_icons', 5).setScale(1.5).setInteractive().setTint(0xc76210);
+    this.return = this.add.image(game.config.width / 2, 1550, 'menu_icons', 5).setScale(1.5).setInteractive().setTint(0xc76210);
 
     //this.backText = this.add.bitmapText(game.config.width / 2, 1500, 'atari', '< back', 60).setOrigin(.5, .5).setTint(0xd8a603).setInteractive();
     this.return.level = -2;
 
     this.input.on('gameobjectup', this.clickHandler, this);
-   // this.input.on('poimterdown', this.down,this);
-   // this.input.on('pointermove', this.move,this);
+    // this.input.on('poimterdown', this.down,this);
+    // this.input.on('pointermove', this.move,this);
     //this.input.on('pointerup', this.up,this);
 
   }
 
-down(e){
-  
-}
-move(e){
- // console.log(e.downX - e.x)
-  if((e.downX - e.x) > 55 || (e.downX - e.x) > -55){
-    this.swipe = true;
-    
+  down(e) {
+
   }
-} 
-up(e){
-  if(e.downX < e.x){
-      console.log('right')
-    } else {
-      console.log('left')
+  move(e) {
+    // console.log(e.downX - e.x)
+    if ((e.downX - e.x) > 55 || (e.downX - e.x) > -55) {
+      this.swipe = true;
+
     }
-}
+  }
+  up(e) {
+    if (e.downX < e.x) {
+      //console.log('right')
+    } else {
+      // console.log('left')
+    }
+  }
 
   showGroup(groupNum) {
     if (this.groupBox) {
@@ -64,35 +64,35 @@ up(e){
 
 
     for (var i = 0; i < groups[groupNum].numLevels; i++) {
-      if(i < 3){
-		 var xpos = 50 + i * 275;
-		 var ypos = 400; 
-	  } else if(i < 6){
-		 var xpos = 50 + (i - 3) * 275;
-		 var ypos = 400 + 275; 
-	  } else if(i < 9){
-		 var xpos = 50 + (i - 6) * 275;
-		 var ypos = 400 + 550; 
-	  } else {
-		 var xpos = 50 + (i - 9) * 275;
-		 var ypos = 400 + 825; 
-	  }
-	     
+      if (i < 3) {
+        var xpos = 50 + i * 275;
+        var ypos = 400;
+      } else if (i < 6) {
+        var xpos = 50 + (i - 3) * 275;
+        var ypos = 400 + 275;
+      } else if (i < 9) {
+        var xpos = 50 + (i - 6) * 275;
+        var ypos = 400 + 550;
+      } else {
+        var xpos = 50 + (i - 9) * 275;
+        var ypos = 400 + 825;
+      }
+
       var tempLevel = levelNum + 1;
       var statusText = this.add.bitmapText(xpos + 112.5, ypos - 60, 'atari', tempLevel, 70).setOrigin(.5).setTint(0x298191);
-	  var levelTitle = this.add.image(xpos,ypos, 'select_icons', 0).setOrigin(0,.5).setScale(.75);
-	  levelTitle.level = levelNum;
+      var levelTitle = this.add.image(xpos, ypos, 'select_icons', 0).setOrigin(0, .5).setScale(.75);
+      levelTitle.level = levelNum;
 
 
 
       if (gameSettings.levelStatus[levelNum] < 0) {
         //levelTitle.setAlpha(.5)
-			levelTitle.setFrame(4);
-        
+        levelTitle.setFrame(4);
+
       } else {
         levelTitle.setInteractive();
         if (gameSettings.levelStatus[levelNum] == 0) {
-          
+
         } else if (gameSettings.levelStatus[levelNum] == '*') {
           levelTitle.setFrame(1);
         } else if (gameSettings.levelStatus[levelNum] == '**') {
@@ -128,7 +128,7 @@ up(e){
       //delay: 500,
       //  yoyo: true,
       callbackScope: this,
-      onComplete: function() {
+      onComplete: function () {
 
       }
     });
@@ -143,7 +143,7 @@ up(e){
       duration: 500,
       //  yoyo: true,
       callbackScope: this,
-      onComplete: function() {
+      onComplete: function () {
         this.groupBox.destroy(true);
         this.showGroup(num);
       }
@@ -153,16 +153,16 @@ up(e){
 
 
   clickHandler(e, block) {
-    if(this.swipe){
-      if(e.downX < e.x){
-      console.log('right')
-    } else {
-      console.log('left')
-    }
-      
+    if (this.swipe) {
+      if (e.downX < e.x) {
+        // console.log('right')
+      } else {
+        // console.log('left')
+      }
+
       this.swipe = false;
       return
-      
+
     }
     if (block.level == -1) {
 
@@ -180,7 +180,7 @@ up(e){
       onGroup = this.startGroup;
       //gameMode = 'challenge'
       this.scene.pause();
-	  this.scene.launch('preview',{level: block.level, group: this.startGroup})
+      this.scene.launch('preview', { level: block.level, group: this.startGroup })
       //this.scene.start('playGame');
       //this.scene.launch('UI');
     }

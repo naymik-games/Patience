@@ -69,15 +69,14 @@ class Pyramid {
         offsetx += this.scene.cardWidth + this.scene.cardSpacing;
       }
     }
-    console.log(tableau)
+    //console.log(tableau)
     //set up stock
     var length = d.cards.length
     var count = d.cards.length
     for (var i = 0; i < length; i++) {
       var card = d.cards.pop();
-      var frame = card.index;
-      card.faceDown = false
-      card.setFrame(frame)
+      var frame = onBack;
+      card.setTexture('backs', frame)
       card.displayWidth = card.cardWidth
       card.displayHeight = card.cardHeight
       card.place = 'stock'
@@ -120,7 +119,9 @@ class Pyramid {
       this.scene.children.bringToTop(card)
       card.place = 'waste';
       waste.push(card);
-      // card.flip('f');
+      if (card.faceDown) {
+        card.flip('f');
+      }
       var tween = this.scene.tweens.add({
         targets: card,
         x: wastePosition.x + i * 10,
@@ -128,10 +129,15 @@ class Pyramid {
         duration: 300,
         delay: i * 100
       })
-
+      if (stock.length > 0) {
+        var stockCard = stock[stock.length - 1]
+        if (stockCard.faceDown) {
+          stockCard.flip('f');
+        }
+      }
 
     }
-    //console.log(stock.length)
+    console.log(stock)
     if (stock.length == 0 && this.redealCount < this.redealMax && this.allowRedeal) {
       this.scene.drawPile.setInteractive()
     }
@@ -140,7 +146,7 @@ class Pyramid {
     this.scene.drawPile.disableInteractive()
     this.redealCount++
     var length = waste.length
-    for (var i = 0; i < length; i++) {
+    for (var i = 0; i < waste.length; i++) {
       var card = waste.pop()
       card.place = 'stock'
       card.stack = -1
@@ -161,7 +167,7 @@ class Pyramid {
     }
   }
   moveSelected(toCard) {
-    console.log(this.scene.selection)
+    //console.log(this.scene.selection)
     if (this.scene.selection[0].value + this.scene.selection[1].value == 13) {
       var fromStack
       var fromPlace
@@ -178,7 +184,22 @@ class Pyramid {
           waste.pop()
         } else if (from.place == 'stock') {
           stock.pop()
+          if (stock.length > 0) {
+            var stockCard = stock[stock.length - 1]
+            if (stockCard.faceDown) {
+              stockCard.flip('f');
+            }
+          }
+          if (stock.length == 0 && this.redealCount < this.redealMax && this.allowRedeal) {
+            this.scene.drawPile.setInteractive()
+          }
         }
+
+
+
+
+
+
 
         from.stack = 0
         from.place = 'foundation'
@@ -200,7 +221,7 @@ class Pyramid {
 
 
       }
-      console.log(tableau)
+      //console.log(tableau)
     } else {
       for (var i = 0; i < this.scene.selection.length; i++) {
         var from = this.scene.selection[i];
@@ -211,17 +232,18 @@ class Pyramid {
   }
   moveToFoundation(card) {
     if (card.place == 'tableau') {
-      tableau[card.stack].pop();
-      card.place = 'foundation'
-      this.scene.flipStack(card.stack, 'tableau')
+      var stackIndex = tableau[card.stack].findIndex(x => x.index === card.index);
+      var placeHolder = { slot: card.slot, stack: card.stack, value: -1, place: tableau }
+      tableau[card.stack].splice(stackIndex, 1, placeHolder)
     } else if (card.place == 'waste') {
       waste.pop();
-      card.place = 'foundation'
+
     } else if (card.place == 'stock') {
       stock.pop();
-      card.place = 'foundation'
+
     }
     card.stack = 0
+    card.place = 'foundation'
     foundation[0].push(card);
     this.scene.children.bringToTop(card)
     var tween = this.scene.tweens.add({
@@ -248,10 +270,10 @@ class Pyramid {
     if (card.place == 'tableau') {
       if (typeof tableau[card.stack + 1] == 'undefined') { return true }
 
-      if ((tableau[card.stack + 1][card.slot].value != -1 || tableau[card.stack + 1][card.slot + 1].value != -1)) {
+      if ((tableau[card.stack + 1][card.slot].value != -1 && tableau[card.stack + 1][card.slot + 1].value != -1)) {
 
-        console.log('card stack ' + card.stack + ', card slot ' + card.slot)
-        console.log(tableau[card.stack + 1][card.slot])
+        // console.log('card stack ' + card.stack + ', card slot ' + card.slot)
+        // console.log(tableau[card.stack + 1][card.slot])
         return false
       }
       return true

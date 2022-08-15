@@ -58,7 +58,7 @@ class Klondike {
 
       }
     }
-    console.log(d.cards.length)
+    //console.log(d.cards.length)
     //set up stock
     var length = d.cards.length
     for (var i = 0; i < length; i++) {
@@ -81,7 +81,7 @@ class Klondike {
       });
 
     }
-    console.log(stock)
+    //console.log(stock)
   }
 
 

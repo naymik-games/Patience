@@ -121,8 +121,8 @@ class playGame extends Phaser.Scene {
         cells.push(new Array())
         count++
       }
-      console.log(cells)
-      console.log(freePositions)
+      //console.log(cells)
+      // console.log(freePositions)
     }
     //FOUNDATION///////////////////////////////////////////
     if (gameRules.foundation) {
@@ -218,7 +218,7 @@ class playGame extends Phaser.Scene {
       d.acesHigh()
     }
 
-    console.log(d.cards.length)
+    //console.log(d.cards.length)
     //create markers
 
     gameRules.deal()
@@ -300,7 +300,7 @@ class playGame extends Phaser.Scene {
         if (gameRules.topSelectOnly && !this.isTopCard(card)) { return }
         if (card.place == 'tableau' && gameRules.allowMult) {
           var stackIndex = tableau[card.stack].findIndex(x => x.index === card.index);
-          console.log('stack index ' + stackIndex)
+          //console.log('stack index ' + stackIndex)
           if (!this.validateStack(tableau, stackIndex, card.stack)) {
             return
           }
@@ -331,7 +331,7 @@ class playGame extends Phaser.Scene {
         } else if (card.place == 'free' && gameRules.freeMult) {
           //if free cell allow multiple cards, only select from bootom card down
           if (this.isBottomCard(card)) {
-            console.log('correct')
+            //console.log('correct')
             for (var i = 0; i < cells[card.stack].length; i++) {
               var car = cells[card.stack][i];
               car.setTint(0x00ff00);
@@ -379,7 +379,7 @@ class playGame extends Phaser.Scene {
             }
             return
           } else if (!gameRules.moveKingEmpty && gameRules.moveToEmpty) {
-            console.log('finding empty spot')
+            //console.log('finding empty spot')
             var temp = this.findEmptyStack();
             if (temp > -1) {
               var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }
@@ -393,9 +393,9 @@ class playGame extends Phaser.Scene {
       } else {
         //SECOND CLICK
         if (this.selection.length > 0) {
-          console.log('second click')
+          //console.log('second click')
           if (gameRules.allowDoubleSelection && this.selection.length == 1) {
-            console.log('adding second card...')
+            //console.log('adding second card...')
             if (onGame == 10) {
               if (!gameRules.checkCard(card)) {
                 return
@@ -403,7 +403,7 @@ class playGame extends Phaser.Scene {
             }
             this.selection.push(card)
           }
-          console.log(this.selection)
+          //console.log(this.selection)
           gameRules.moveSelected(card)
         }
         /*   for (var i = 0; i < this.selection.length; i++) {
@@ -463,7 +463,7 @@ class playGame extends Phaser.Scene {
       return true
     }
     if (index == place[stack].length - 1) {
-      console.log('only one so good')
+      //console.log('only one so good')
       return true
     }
 
@@ -471,7 +471,7 @@ class playGame extends Phaser.Scene {
       var value = place[stack][index].value;
       var suit = place[stack][index].suit;
       for (var i = index + 1; i < place[stack].length; i++) {
-        console.log('validating...')
+        // console.log('validating...')
         if (place[stack][i].suit != suit || place[stack][i].value + 1 != value || place[stack][i].faceDown) {
           return false
         }
@@ -482,7 +482,7 @@ class playGame extends Phaser.Scene {
       var value = place[stack][index].value;
       var color = place[stack][index].color;
       for (var i = index + 1; i < place[stack].length; i++) {
-        console.log('validating...')
+        //console.log('validating...')
         if (place[stack][i].color == color || place[stack][i].value + 1 != value || place[stack][i].faceDown) {
           return false
         }
@@ -540,7 +540,7 @@ class playGame extends Phaser.Scene {
     }
   }
   flipStack(stack, place) {
-    console.log(place)
+    //console.log(place)
     if (stack == -1) {
       return
     }
@@ -553,10 +553,10 @@ class playGame extends Phaser.Scene {
 
       }
     } else if (place == 'reserve') {
-      console.log(reserve.length)
+      //console.log(reserve.length)
       if (reserve.length > 0) {
         var card = reserve[reserve.length - 1];
-        console.log(card.faceDown)
+        // console.log(card.faceDown)
         if (card.faceDown) {
           card.flip('f')
         }

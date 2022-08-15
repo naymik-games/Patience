@@ -148,7 +148,7 @@ class Missmilligan {
         from.place = 'free'
         var stackLength = cells[toCard.stack].length
         cells[0].push(from);
-        console.log(stackLength)
+        //console.log(stackLength)
         this.scene.children.bringToTop(from)
         // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
         var tween = this.scene.tweens.add({
@@ -186,7 +186,7 @@ class Missmilligan {
         from.place = toCard.place
         var stackLength = tableau[toCard.stack].length
         tableau[toCard.stack].push(from);
-        console.log(stackLength)
+        //console.log(stackLength)
         this.scene.children.bringToTop(from)
         // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
         var tween = this.scene.tweens.add({

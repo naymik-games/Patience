@@ -57,7 +57,7 @@ class Montecarlo {
         count++
       }
     }
-    console.log(tableau)
+    //console.log(tableau)
     //set up stock
     var length = d.cards.length
     for (var i = 0; i < length; i++) {
@@ -127,13 +127,13 @@ class Montecarlo {
       }
       this.scene.selection = []
     }
-    console.log(tableau)
+    //console.log(tableau)
   }
   validPlay() {
     var card1 = this.scene.selection[0]
     var card2 = this.scene.selection[1]
-    console.log(card1)
-    console.log(card2)
+    //console.log(card1)
+    //console.log(card2)
     return (Math.abs(card1.slot - card2.slot) + Math.abs(card1.col - card2.col) == 1) || (Math.abs(card1.slot - card2.slot) == 1 && Math.abs(card1.col - card2.col) == 1);
   }
   moveToFoundation(card) {
@@ -172,8 +172,8 @@ class Montecarlo {
         cardsTemp.push(c)
       }
     }
-    console.log(tableau)
-    console.log(cardsTemp)
+    //console.log(tableau)
+    //console.log(cardsTemp)
     var count = 0
     for (var i = 0; i < 25; i++) {
 
@@ -258,7 +258,7 @@ class Montecarlo {
     console.log(tableau) */
   }
   checkWin() {
-    console.log('checking win...')
+    // console.log('checking win...')
     if (foundation[0].length != 52) {
       return
     }

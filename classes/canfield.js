@@ -106,7 +106,7 @@ class Canfield {
 
       }
     }
-    console.log(d.cards.length)
+    //console.log(d.cards.length)
     //set up stock
     var length = d.cards.length
     for (var i = 0; i < length; i++) {
@@ -197,7 +197,7 @@ class Canfield {
     if (toCard.place == 'cell') {
       var fromStack
       var fromPlace
-      console.log('move to cell')
+      //console.log('move to cell')
       var from = this.scene.selection[0];
       fromStack = from.stack
       fromPlace = from.place
@@ -244,7 +244,7 @@ class Canfield {
         from.place = toCard.place
         var stackLength = tableau[toCard.stack].length
         tableau[toCard.stack].push(from);
-        console.log(stackLength)
+        //console.log(stackLength)
         this.scene.children.bringToTop(from)
         // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
         var tween = this.scene.tweens.add({

@@ -96,7 +96,7 @@ class Cruel {
         from.place = toCard.place
         var stackLength = tableau[toCard.stack].length
         tableau[toCard.stack].push(from);
-        console.log(stackLength)
+        //console.log(stackLength)
         this.scene.children.bringToTop(from)
         // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
         var tween = this.scene.tweens.add({
@@ -120,7 +120,7 @@ class Cruel {
       }
       this.scene.selection = []
     }
-    console.log(this.scene.selection)
+    //console.log(this.scene.selection)
   }
   moveToFoundation(card) {
 
@@ -156,8 +156,8 @@ class Cruel {
         cardsTemp.push(c)
       }
     }
-    console.log(tableau)
-    console.log(cardsTemp)
+    //console.log(tableau)
+    //console.log(cardsTemp)
     for (var col = 0; col < 12; col++) {
       for (var row = 0; row < 4; row++) {
         if (cardsTemp.length > 0) {
@@ -184,7 +184,7 @@ class Cruel {
 
       }
     }
-    console.log(tableau)
+    // console.log(tableau)
 
   }
   checkWin() {
