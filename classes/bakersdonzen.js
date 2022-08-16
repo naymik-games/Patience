@@ -14,14 +14,15 @@ class Bakers {
     this.allowRedeal = false
     this.allowMult = false
     this.moveKingEmpty = true
-    this.moveToEmpty = false
+    this.moveToEmpty = true
     this.showFoundationLabel = false
     this.allowFoundCheck = true
     this.foundationValue = 1
+    this.topSelectOnly = true
     this.draw = 3
     this.yOffset = 200
     this.redealMax = 200
-    this.tableauReveal = 30
+    this.tableauReveal = 35
     this.redealCount = 0
     this.tabSetUp = [0, 1, 2, 3, 4, 5, 6];
     this.stacksSetup = [[4], [4], [4], [4], [4], [4], [4], [4], [4], [4], [4], [4]];
