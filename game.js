@@ -70,6 +70,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Montecarlo(this)
     } else if (onGame == 12) {
       gameRules = new Missmilligan(this)
+    } else if (onGame == 13) {
+      gameRules = new Bakers(this)
     }
 
 
@@ -178,6 +180,29 @@ class playGame extends Phaser.Scene {
             tableau.push(new Array())
           }
         }
+      } else if (onGame == 13) {
+        for (var row = 1; row < 3; row++) {
+          for (var col = 0; col < 7; col++) {
+            if (row == 2 && col == 6) {
+
+            } else {
+              if (row == 1) {
+                var add = 0
+              } else {
+                var add = 2
+              }
+              var x = this.cardSpacing + this.cardWidth / 2 + col * (this.cardWidth + this.cardSpacing)
+              var y = (gameRules.yOffset + this.cardSpacingY) + (row + add) * (this.cardHeight + this.cardSpacingY)
+              tabPositions.push({ x: x, y: y })
+              var tab = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setInteractive().setDepth(0).setAlpha(.5);
+              tableau.push(new Array())
+            }
+
+
+
+          }
+        }
+
       } else {
 
         for (var t = gameRules.tableau.col; t < gameRules.tableau.col + gameRules.tableau.num; t++) {

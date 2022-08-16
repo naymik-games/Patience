@@ -30,6 +30,7 @@ var filesToCache = [
   '/classes/pyramid.js',
   '/classes/montecarlo.js',
   '/classes/missmilligan.js',
+  '/classes/backersdozen.js',
   '/classes/carGame.js',
 
 
@@ -52,7 +53,7 @@ var filesToCache = [
   '/assets/sprites/cards_minimal.png',
   '/assets/sprites/cards_mobile.png',
   '/assets/sprites/cards_thin.png',
-  '/assets/sprites/cards_animal.png',
+
 
   '/assets/sprites/backs.png',
 
