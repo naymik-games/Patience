@@ -63,6 +63,10 @@ let decks = [
   {
     key: 'cards_thin',
     name: 'Thin'
+  },
+  {
+    key: 'cards_8bit',
+    name: '8 Bit'
   }
 ]
 let onGame = 1

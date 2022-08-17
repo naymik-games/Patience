@@ -164,7 +164,12 @@ class playGame extends Phaser.Scene {
         for (var row = 1; row < 4; row++) {
           for (var col = 0; col < 4; col++) {
             var x = this.cardSpacing + this.cardWidth / 2 + col * (this.cardWidth + this.cardSpacing)
-            var y = (gameRules.yOffset + this.cardSpacingY) + row * (this.cardHeight + this.cardSpacingY)
+            if (row == 1) {
+              var y = (gameRules.yOffset - 25) + row * (this.cardHeight + this.cardSpacingY + 75)
+            } else {
+              var y = (gameRules.yOffset + 25) + (row) * (this.cardHeight + (this.cardSpacingY + 50))
+            }
+
             tabPositions.push({ x: x, y: y })
             var tab = this.add.image(x, y, cardKey, 62).setScale(s).setOrigin(.5).setInteractive().setDepth(0).setAlpha(.5);
             tableau.push(new Array())
