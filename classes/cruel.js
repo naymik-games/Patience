@@ -11,6 +11,7 @@ class Cruel {
     this.tableau = { num: 12, col: 0, row: 1, build: 'suitdesc' }
     this.free = null
     this.reserve = null
+    this.allowFoundationMove = false;
     this.allowRedeal = true
     this.allowMult = false
     this.moveKingEmpty = false

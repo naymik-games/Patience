@@ -313,10 +313,11 @@ class playGame extends Phaser.Scene {
       gameRules.drawStock()
       return
     }
-    if (!card.faceDown && (card.place == 'tableau' || card.place == 'waste' || card.place == 'cell' || card.place == 'free' || card.place == 'reserve' || card.place == 'stock')) {
+    if (!card.faceDown && (card.place == 'tableau' || card.place == 'waste' || card.place == 'cell' || card.place == 'free' || card.place == 'reserve' || card.place == 'stock' || card.place == 'foundation')) {
       //FIRST CLICK
       if (this.selection.length === 0) {
         if (card.place == 'cell') { return }
+        if (card.place == 'foundation' && gameRules.allowFoundationMove == false) { return }
         //check if card can go to foundation
         if (gameRules.allowFoundCheck) {
           var foundationCheck = this.checkFoundation(card.suitNum, card.value, card)

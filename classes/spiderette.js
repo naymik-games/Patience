@@ -18,6 +18,7 @@ class Spiderette {
     this.moveKingEmpty = false
     this.moveToEmpty = true
     this.showFoundationLabel = false
+    this.allowFoundationMove = false;
     this.foundationValue = 1
     this.draw = 7
     this.yOffset = 200

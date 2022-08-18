@@ -16,6 +16,7 @@ class Missmilligan {
     this.allowMult = true
     this.freeMult = true
     this.allowFoundCheck = true
+    this.allowFoundationMove = true;
     this.moveKingEmpty = true
     this.moveToEmpty = true
     this.showFoundationLabel = false
@@ -167,6 +168,16 @@ class Missmilligan {
       }
       return
     }
+    if (toCard.place == 'free') {
+      for (var i = 0; i < this.scene.selection.length; i++) {
+        var from = this.scene.selection[i];
+        from.clearTint()
+      }
+      this.scene.selection = []
+      return
+    }
+
+
     if ((this.scene.selection[0].value + 1 == toCard.value && this.scene.selection[0].color != toCard.color) || toCard.moveEmpty) {
 
       var fromStack
@@ -180,6 +191,8 @@ class Missmilligan {
           tableau[from.stack].pop()
         } else if (from.place == 'free') {
           cells[0].pop()
+        } else if (from.place == 'foundation') {
+          foundation[from.stack].pop()
         }
 
         from.stack = toCard.stack

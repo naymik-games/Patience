@@ -14,6 +14,7 @@ class Free {
     this.allowRedeal = false
     this.allowMult = false
     this.topSelectOnly = true
+    this.allowFoundationMove = false;
     this.moveKingEmpty = false
     this.moveToEmpty = true
     this.showFoundationLabel = false

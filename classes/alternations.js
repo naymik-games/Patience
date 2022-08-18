@@ -14,6 +14,7 @@ class Alternations {
     this.reserve = null
     this.allowRedeal = false
     this.allowMult = true
+    this.allowFoundationMove = false;
     this.allowFoundCheck = true
     this.moveKingEmpty = false
     this.moveToEmpty = true

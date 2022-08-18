@@ -18,6 +18,7 @@ class Yukon {
     this.showFoundationLabel = false
     this.foundationValue = 1
     this.allowFoundCheck = true
+    this.allowFoundationMove = false;
     this.draw = 3
     this.yOffset = 200
     this.redealMax = 200

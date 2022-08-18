@@ -18,6 +18,7 @@ class Pyramid {
     this.moveKingEmpty = false
     this.moveToEmpty = false
     this.moveKingToFoundation = true
+    this.allowFoundationMove = false;
     this.allowDoubleSelection = true
     this.stockInPlay = true
     this.showFoundationLabel = false

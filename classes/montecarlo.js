@@ -15,6 +15,7 @@ class Montecarlo {
     this.allowMult = false
     this.moveKingEmpty = false
     this.showFoundationLabel = false
+    this.allowFoundationMove = false;
     this.allowFoundCheck = false
     this.singleClick = false
     this.foundationValue = 1

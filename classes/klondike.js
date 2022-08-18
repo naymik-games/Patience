@@ -11,6 +11,7 @@ class Klondike {
     this.tableau = { num: 7, col: 0, row: 1, build: 'colorAlt' }
     this.free = null
     this.reserve = null
+    this.allowFoundationMove = false;
     this.allowRedeal = true
     this.allowMult = true
     this.allowFoundCheck = true

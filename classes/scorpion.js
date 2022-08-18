@@ -19,6 +19,7 @@ class Scorpion {
     this.allowMult = true
     this.moveKingEmpty = true
     this.moveToEmpty = true
+    this.allowFoundationMove = false;
     this.showFoundationLabel = false
     this.foundationValue = 1
     this.allowFoundCheck = false

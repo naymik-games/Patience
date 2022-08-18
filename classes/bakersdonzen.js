@@ -13,6 +13,7 @@ class Bakers {
     this.reserve = null
     this.allowRedeal = false
     this.allowMult = false
+    this.allowFoundationMove = false;
     this.moveKingEmpty = true
     this.moveToEmpty = true
     this.showFoundationLabel = false
@@ -75,7 +76,7 @@ class Bakers {
         from.place = toCard.place
         var stackLength = tableau[toCard.stack].length
         tableau[toCard.stack].push(from);
-        console.log(stackLength)
+        //console.log(stackLength)
         this.scene.children.bringToTop(from)
         // from.setPosition(toCard.x,(toCard.y + 50) + (i * 50))
         var tween = this.scene.tweens.add({

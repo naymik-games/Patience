@@ -9,6 +9,7 @@ class Aces {
     this.stock = { num: 1, col: 4, row: 0 }
     this.waste = { num: 1, col: 4, row: 1 }
     this.foundation = null
+    this.allowFoundationMove = false;
     this.tableau = { num: 4, col: 0, row: 0, build: 'no' }
     this.free = { num: 1, col: 4, row: 2 }
     this.reserve = null

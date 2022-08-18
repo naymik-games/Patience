@@ -22,7 +22,7 @@ class startGame extends Phaser.Scene {
     onDeck = gameSettings.deckNum
     onColor = gameSettings.color
     onBack = gameSettings.back
-    this.cameras.main.setBackgroundColor(0x077837);
+    this.cameras.main.setBackgroundColor(0x034C22);
 
     var title = this.add.bitmapText(game.config.width / 2, 100, 'topaz', 'PATIENCE', 150).setOrigin(.5).setTint(0xcbf7ff);
 
@@ -88,7 +88,7 @@ class startGame extends Phaser.Scene {
     var instructions = this.add.bitmapText(450, 530, 'topaz', '(Click to change)', 30).setOrigin(.5).setTint(0xffffff);
 
     var gameLabel = this.add.bitmapText(game.config.width / 2, 660, 'topaz', 'Pick Your Game', 75).setOrigin(.5).setTint(0xcbf7ff);
-
+    var gameArray = []
     for (var g = 0; g < games.length; g++) {
       //check if the number is even
       if (g % 2 == 0) {
@@ -101,13 +101,26 @@ class startGame extends Phaser.Scene {
       var y = 775 + ty * 50;
       var text = games[g].name + ' (' + gameProgress[g][1] + '/' + gameProgress[g][0] + ')'
       var gameText = this.add.bitmapText(x, y, 'topaz', text, 40).setOrigin(0, .5).setTint(0xffffff).setInteractive();
+      gameText.on('pointerup', this.click.bind(this, gameText));
       gameText.name = games[g].name
       gameText.num = g;
-
+      gameArray.push(gameText)
     }
 
-
-    this.input.on('gameobjectdown', this.click, this);
+    var resetLabel = this.add.bitmapText(450, 1600, 'topaz', 'Reset Stats', 35).setOrigin(.5).setTint(0xffffff).setInteractive();
+    resetLabel.on('pointerdown', function () {
+      localStorage.removeItem('PatienceProgress');
+      gameProgress = defaultGameProgress
+      localStorage.setItem('PatienceProgress', JSON.stringify(gameProgress));
+      resetLabel.setText('Stats Reset')
+      for (let i = 0; i < gameArray.length; i++) {
+        const gameText = gameArray[i];
+        var text = games[i].name + ' (' + gameProgress[i][1] + '/' + gameProgress[i][0] + ')'
+        gameText.setText(text)
+        resetLabel.disableInteractive()
+      }
+    }, this)
+    //this.input.on('gameobjectdown', this.click, this);
 
   }
   clickHandler() {
@@ -115,7 +128,7 @@ class startGame extends Phaser.Scene {
     this.scene.start('playGame');
     this.scene.launch('UI');
   }
-  click(e, obj) {
+  click(obj) {
 
     if (obj.name) {
       onGame = obj.num;

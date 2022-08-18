@@ -139,6 +139,6 @@ let games = [
   {
     name: 'Bakers',
     objective: 'Move all cards to the foundation.',
-    rules: '[b]Foundation[/b]Any ace may be moved to any empty pile in the foundation.\n[b]Tableau [/b]A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of the [color=red]opposite color[/color]. Cards on the tableau that are not under another card are available for play onto the foundation or any other tableau pile.Empty spaces in the tableau may be filled by kings only. Groups of cards in sequence down may be moved from one tableau column to another if the cards are alternately red and black.\n [b]Stock [/b]Each time you click on the stock, a card will be dealt on top of each tableau pile, unitil the stock is empty.\n[b]Free Cell [/b] A single card or stack of cards can be temporarily stored in the free cell. If there is a stack of cards in the pocket then you can not take cards out individually. Only the complete sequence can be removed.'
+    rules: '[b]Foundation[/b]Any ace may be moved to any empty pile in the foundation.\n[b]Tableau [/b]A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of [color=red]any suit[/color].\nCards on the tableau that are not under another card are available for play onto the foundation or any non-empty tableau pile.\nOnly one card may moved at a time, never sequences.\nEmpty spaces in the tableau may be filled with Kings only.'
   }
 ]

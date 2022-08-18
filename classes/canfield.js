@@ -12,6 +12,7 @@ class Canfield {
     this.free = null
     this.reserve = { num: 1, col: 0, row: 0 }
     this.allowRedeal = true
+    this.allowFoundationMove = false;
     this.allowMult = true
     this.moveKingEmpty = false
     this.moveToEmpty = true
