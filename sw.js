@@ -1,4 +1,4 @@
-var cacheName = 'Patience v.09';
+var cacheName = 'Patience v.10';
 var filesToCache = [
   '/',
   '/index.html',
@@ -53,6 +53,7 @@ var filesToCache = [
   '/assets/sprites/cards_minimal.png',
   '/assets/sprites/cards_mobile.png',
   '/assets/sprites/cards_thin.png',
+  '/assets/sprites/cards_pixeldark.png',
 
 
   '/assets/sprites/backs.png',

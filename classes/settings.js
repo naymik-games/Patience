@@ -65,8 +65,8 @@ let decks = [
     name: 'Thin'
   },
   {
-    key: 'cards_8bit',
-    name: '8 Bit'
+    key: 'cards_pixeldark',
+    name: 'Pixel Dark'
   }
 ]
 let onGame = 1
@@ -74,7 +74,7 @@ let games = [
   {
     name: 'Klondike',
     objective: 'To build the foundations up in suit to kings.',
-    rules: 'The top cards of tableau piles and waste pile are available to play. \nYou may build tableau piles down in sequence and [b]alternating color[/b]. \nOne card or group of cards in the proper sequence can be moved from pile to pile. \nIf, during play, any closed cards become the top card of a stack, it turns over. \nEmpty tableaus may be filled with a King or group of cards headed with a King.\nWhen you have made all the moves initially available, begin turning over cards from the stock pile. 3 cards at a time are turned over from the Stock.'
+    rules: '[b]Foundation [/b]Any ace may be moved to any empty pile in the foundation.\n[b]Tableau [/b]You may build tableau piles down in sequence and [color=red]alternating color[/color].\n The top cards of tableau piles and waste pile are available to play.\nOne card or group of cards in the proper sequence can be moved from pile to pile. \nIf, during play, any closed cards become the top card of a stack, it turns over. \nEmpty tableaus may be filled with a King or group of cards headed with a King.\n[b]Stock [/b]When you have made all the moves initially available, begin turning over cards from the stock pile. 3 cards at a time are turned over from the Stock an unlimited amount of times.'
   },
   {
     name: 'Yukon',
@@ -88,7 +88,7 @@ let games = [
   },
   {
     name: 'Golf',
-    objective: 'Transfer all the cards from the seven columns to the single waste pile as quickly as possible.',
+    objective: 'Transfer all the cards to the single waste pile.',
     rules: 'A single, exposed card from one of the seven columns may be transferred to the waste pile if it follows either an ascending or descending sequence regardless of suit. Sequences may turn the corner with Kings building on Aces and Aces building on Kings. When no more cards from the columns can be transferred to the waste pile, a card from the stock is dealt to the waste pile and building resumes.'
   },
   {

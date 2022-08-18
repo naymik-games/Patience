@@ -25,12 +25,13 @@ class pauseGame extends Phaser.Scene {
     this.backBack3.displayWidth = 750;
     this.backBack3.displayHeight = 1260;
 
-    var titleLabel = this.add.bitmapText(game.config.width / 2, 250, 'topaz', games[onGame].name, 75).setOrigin(.5).setTint(0x000000);
-
-    var objectiveLabel = this.add.bitmapText(game.config.width / 2, 350, 'topaz', 'Objective', 40).setOrigin(.5).setTint(0x000000);
-    var objective = this.add.rexBBCodeText(115, 400, games[onGame].objective, { fontFamily: 'Arial', fontSize: 48, color: '#000000', align: 'left', wrap: { mode: 1, width: 670 } });
+    var titleLabel = this.add.bitmapText(game.config.width / 2, 240, 'topaz', games[onGame].name, 65).setOrigin(.5).setTint(0x000000);
+    var text = 'Wins: ' + gameProgress[onGame][1] + ', Attempts: ' + gameProgress[onGame][0] + ' ' + Math.floor(gameProgress[onGame][1] / gameProgress[onGame][0] * 100) + '%'
+    var statsLabel = this.add.bitmapText(game.config.width / 2, 325, 'topaz', text, 35).setOrigin(.5).setTint(0x000000);
+    var objectiveLabel = this.add.bitmapText(game.config.width / 2, 400, 'topaz', 'Objective', 40).setOrigin(.5).setTint(0x000000);
+    var objective = this.add.rexBBCodeText(115, 450, games[onGame].objective, { fontFamily: 'Arial', fontSize: 48, color: '#000000', align: 'left', wrap: { mode: 1, width: 670 } });
     //var objective = this.add.bitmapText(game.config.width / 2, 525, 'topaz', games[onGame].objective, 35).setOrigin(.5).setTint(0x000000).setMaxWidth(650);
-    var rulesLabel = this.add.bitmapText(game.config.width / 2, 550, 'topaz', 'Rules', 40).setOrigin(.5).setTint(0x000000);
+    var rulesLabel = this.add.bitmapText(game.config.width / 2, 600, 'topaz', 'Rules', 40).setOrigin(.5).setTint(0x000000);
     //var rules = this.add.bitmapText(game.config.width / 2, 675, 'topaz', games[onGame].rules, 30).setOrigin(.5, 0).setTint(0x000000).setMaxWidth(650);
 
 
@@ -41,7 +42,7 @@ class pauseGame extends Phaser.Scene {
 
     var textArea = this.rexUI.add.textArea({
       x: 450,
-      y: 1000,
+      y: 1050,
       width: 670,
       height: 775,
 
