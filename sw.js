@@ -55,7 +55,7 @@ var filesToCache = [
   '/assets/sprites/cards_mobile.png',
   '/assets/sprites/cards_thin.png',
   '/assets/sprites/cards_pixeldark.png',
-
+  '/assets/sprites/cards_windows7.png',
 
   '/assets/sprites/backs.png',
 
