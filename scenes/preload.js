@@ -174,6 +174,12 @@ class preloadGame extends Phaser.Scene {
       spacing: 1,
       margin: 1
     });
+    this.load.spritesheet("cards_windows7", "assets/sprites/cards_windows7.png", {
+      frameWidth: 73,
+      frameHeight: 98,
+      spacing: 0,
+      margin: 0
+    });
     this.load.image('blank', 'assets/sprites/blank.png');
 
   }

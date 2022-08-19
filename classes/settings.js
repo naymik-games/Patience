@@ -67,6 +67,10 @@ let decks = [
   {
     key: 'cards_pixeldark',
     name: 'Pixel Dark'
+  },
+  {
+    key: 'cards_windows7',
+    name: 'Windows 7'
   }
 ]
 let onGame = 1
