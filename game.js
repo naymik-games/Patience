@@ -72,6 +72,8 @@ class playGame extends Phaser.Scene {
       gameRules = new Missmilligan(this)
     } else if (onGame == 13) {
       gameRules = new Bakers(this)
+    } else if (onGame == 14) {
+      gameRules = new Forty(this)
     }
 
 
