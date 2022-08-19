@@ -44,7 +44,7 @@ var filesToCache = [
   '/assets/sprites/cards_largeindex.png',
   '/assets/sprites/cards_modern.png',
   '/assets/sprites/cards_sixties_2.png',
-  '/assets/sprites/cards_simple.png',
+
 
 
   '/assets/sprites/cards_apollo.png',

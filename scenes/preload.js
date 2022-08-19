@@ -100,10 +100,10 @@ class preloadGame extends Phaser.Scene {
       margin: 2
     });
     this.load.spritesheet("cards_sixty_2", "assets/sprites/cards_sixties_2.png", {
-      frameWidth: 178,
-      frameHeight: 250,
-      spacing: 2,
-      margin: 2
+      frameWidth: 89,
+      frameHeight: 125,
+      spacing: 1,
+      margin: 1
     });
     this.load.spritesheet("cards_largeindex", "assets/sprites/cards_largeindex.png", {
       frameWidth: 178,
@@ -111,12 +111,12 @@ class preloadGame extends Phaser.Scene {
       spacing: 2,
       margin: 2
     });
-    this.load.spritesheet("cards_simple", "assets/sprites/cards_simple.png", {
-      frameWidth: 206,
-      frameHeight: 292,
-      spacing: 2,
-      margin: 2
-    });
+    /*  this.load.spritesheet("cards_simple", "assets/sprites/cards_simple.png", {
+       frameWidth: 206,
+       frameHeight: 292,
+       spacing: 2,
+       margin: 2
+     }); */
 
 
     this.load.spritesheet("backs", "assets/sprites/backs.png", {
