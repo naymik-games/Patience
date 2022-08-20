@@ -55,7 +55,7 @@ class startGame extends Phaser.Scene {
     deckBack.on('pointerdown', function () {
       onBack++
 
-      if (onBack == 10) {
+      if (onBack == 13) {
         onBack = 0
       }
       deckBack.setFrame(onBack)
