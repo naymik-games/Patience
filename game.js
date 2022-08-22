@@ -74,7 +74,10 @@ class playGame extends Phaser.Scene {
       gameRules = new Bakers(this)
     } else if (onGame == 14) {
       gameRules = new Forty(this)
+    } else if (onGame == 15) {
+      gameRules = new Penguin(this)
     }
+
 
 
     gameProgress[onGame][0]++
@@ -413,6 +416,7 @@ class playGame extends Phaser.Scene {
             return
           } else if (!gameRules.moveKingEmpty && gameRules.moveToEmpty) {
             //console.log('finding empty spot')
+
             var temp = this.findEmptyStack();
             if (temp > -1) {
               var toCard = { place: 'tableau', stack: temp, value: -1, moveEmpty: true }

@@ -145,5 +145,10 @@ let games = [
     name: 'Forty & Eight',
     objective: 'Move all cards to the foundation.',
     rules: '[b]Foundation[/b]Any ace may be moved to any empty pile in the foundation.\n[b]Tableau [/b]A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of [color=red]the same suit[/color].\nCards on the tableau that are not under another card are available for play onto the foundation or any tableau pile.\nOnly one card may moved at a time, never sequences.\nEmpty spaces in the tableau may be filled with any card.\n[b]Stock and Waste [/b] Each time you click on the stock, one card will be dealt from the stock to the waste. Two passes through the stock are permitted.\nThe top card of the waste is available for play to the tableau or the foundation.'
+  },
+  {
+    name: 'Penguin',
+    objective: 'Move all cards to the foundation.',
+    rules: '[b]Foundation[/b]Any ace may be moved to any empty pile in the foundation.\n[b]Tableau [/b]A card may be added onto a tableau pile if it is one lower than the old top card of the pile and of [color=red]the same suit[/color].\nCards on the tableau that are not under another card are available for play onto the foundation or any tableau pile.\nOnly one card may moved at a time, never sequences.\nEmpty spaces in the tableau may be filled with any card.\n[b]Stock and Waste [/b] Each time you click on the stock, one card will be dealt from the stock to the waste. Two passes through the stock are permitted.\nThe top card of the waste is available for play to the tableau or the foundation.'
   }
 ]

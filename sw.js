@@ -32,6 +32,7 @@ var filesToCache = [
   '/classes/missmilligan.js',
   '/classes/backersdozen.js',
   '/classes/fortyandeight.js',
+  '/classes/penguin.js',
   '/classes/carGame.js',
 
 
