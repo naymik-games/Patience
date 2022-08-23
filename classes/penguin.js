@@ -113,7 +113,7 @@ class Penguin {
       this.scene.flipStack(fromStack, fromPlace)
       return
     }
-    if ((this.scene.selection[0].value + 1 == toCard.value && this.scene.selection[0].suit == toCard.suit) || toCard.moveEmpty) {
+    if (this.checkSequence(this.scene.selection[0], toCard) || toCard.moveEmpty) {
 
       var fromStack
       var fromPlace
@@ -162,6 +162,16 @@ class Penguin {
       }
       this.scene.selection = []
     }
+  }
+  checkSequence(from, to) {
+    if (from.value + 1 == to.value && from.suit == to.suit) {
+      return true
+    }
+    if (to.value == 1 && from.value == 13 && from.suit == to.suit) {
+      return true
+    }
+    return false
+
   }
   moveToFoundation(card) {
     if (card.place == 'tableau') {
