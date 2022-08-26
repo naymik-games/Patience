@@ -14,8 +14,8 @@ class Bakers {
     this.allowRedeal = false
     this.allowMult = false
     this.allowFoundationMove = false;
-    this.moveKingEmpty = true
-    this.moveToEmpty = true
+    this.moveKingEmpty = false
+    this.moveToEmpty = false
     this.showFoundationLabel = false
     this.allowFoundCheck = true
     this.foundationValue = 1
@@ -43,6 +43,27 @@ class Bakers {
         card.stack = col
         card.slot = row
         tableau[col].push(card)
+
+
+      }
+    }
+    // console.log(tableau)
+    //bury kinds
+    for (var col = 0; col < 13; col++) {
+      for (var row = 0; row < 4; row++) {
+        var card = tableau[col][row]
+        if (card.value == 13) {
+          var stackIndex = tableau[col].findIndex(x => x.index === card.index);
+          var movedCard = tableau[col].splice(stackIndex, 1)
+          tableau[col].unshift(movedCard[0])
+        }
+      }
+      //
+    }
+    //deal the cards
+    for (var col = 0; col < 13; col++) {
+      for (var row = 0; row < 4; row++) {
+        var card = tableau[col][row]
         this.scene.children.bringToTop(card)
         var tween = this.scene.tweens.add({
           targets: card,
@@ -52,9 +73,9 @@ class Bakers {
           duration: 300,
           delay: (col + row) * 100
         });
-
       }
     }
+    console.log(tableau)
   }
   moveSelected(toCard) {
     if (this.scene.selection[0].value + 1 == toCard.value || this.scene.selection[0].value == 13) {
