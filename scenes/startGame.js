@@ -16,7 +16,7 @@ class startGame extends Phaser.Scene {
     }
     gameProgress = JSON.parse(localStorage.getItem('PatienceProgress'));
     if (gameProgress === null || gameProgress.length <= 0) {
-      localStorage.setItem('PatienceProgress', JSON.stringify(defaultSettings));
+      localStorage.setItem('PatienceProgress', JSON.stringify(defaultGameProgress));
       gameProgress = defaultGameProgress;
     }
     onDeck = gameSettings.deckNum
