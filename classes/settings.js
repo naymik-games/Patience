@@ -14,7 +14,7 @@ let gameSettings
 let bgColors = [0x077837, 0x000000, 0x993300, 0x0033cc, 0xf7eac6, 0x333333, 0x488a81]
 let defaultSettings = { deckNum: 0, sound: false, color: 0, back: 0 };
 let gameProgress
-let defaultGameProgress = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+let defaultGameProgress = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
 let onColor = 0
 let cardKey
 let onDeck = 2

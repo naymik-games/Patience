@@ -23,7 +23,7 @@ class startGame extends Phaser.Scene {
     onColor = gameSettings.color
     onBack = gameSettings.back
     this.cameras.main.setBackgroundColor(0x034C22);
-
+    console.log(gameProgress)
     var title = this.add.bitmapText(game.config.width / 2, 100, 'topaz', 'PATIENCE', 150).setOrigin(.5).setTint(0xcbf7ff);
 
     /*   var startTime = this.add.bitmapText(game.config.width / 2 - 50, 275, 'topaz', 'Play Klondike', 50).setOrigin(0, .5).setTint(0x000000);
