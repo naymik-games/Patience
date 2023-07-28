@@ -85,7 +85,7 @@ class startGame extends Phaser.Scene {
       gameSettings.color = onColor
       localStorage.setItem('Patience', JSON.stringify(gameSettings));
     }, this)
-    var instructions = this.add.bitmapText(450, 530, 'topaz', '(Click to change)', 30).setOrigin(.5).setTint(0xffffff);
+    var instructions = this.add.bitmapText(450, 540, 'topaz', '(Click to change)', 30).setOrigin(.5).setTint(0xffffff);
 
     var gameLabel = this.add.bitmapText(game.config.width / 2, 660, 'topaz', 'Pick Your Game', 75).setOrigin(.5).setTint(0xcbf7ff);
     var gameArray = []
