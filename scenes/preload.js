@@ -111,26 +111,7 @@ class preloadGame extends Phaser.Scene {
       spacing: 2,
       margin: 2
     });
-    /*  this.load.spritesheet("cards_simple", "assets/sprites/cards_simple.png", {
-       frameWidth: 206,
-       frameHeight: 292,
-       spacing: 2,
-       margin: 2
-     }); */
 
-
-    this.load.spritesheet("backs", "assets/sprites/backs.png", {
-      frameWidth: 178,
-      frameHeight: 250,
-      spacing: 2,
-      margin: 0
-    });
-    this.load.spritesheet("cards_apollo", "assets/sprites/cards_apollo.png", {
-      frameWidth: 178,
-      frameHeight: 250,
-      spacing: 2,
-      margin: 2
-    });
 
     this.load.spritesheet("cards_civ", "assets/sprites/cards_civ.png", {
       frameWidth: 225,
@@ -138,46 +119,20 @@ class preloadGame extends Phaser.Scene {
       spacing: 2,
       margin: 2
     });
-    this.load.spritesheet("cards_classic", "assets/sprites/cards_classic.png", {
-      frameWidth: 140,
-      frameHeight: 190,
-      spacing: 2,
-      margin: 2
-    });
-    this.load.spritesheet("cards_draw", "assets/sprites/cards_draw.png", {
-      frameWidth: 141,
-      frameHeight: 198,
-      spacing: 2,
-      margin: 2
-    });
+
+
     this.load.spritesheet("cards_minimal", "assets/sprites/cards_minimal.png", {
       frameWidth: 178,
       frameHeight: 250,
       spacing: 2,
       margin: 2
     });
-    this.load.spritesheet("cards_mobile", "assets/sprites/cards_mobile.png", {
-      frameWidth: 145,
-      frameHeight: 192,
+
+
+    this.load.spritesheet("backs", "assets/sprites/backs.png", {
+      frameWidth: 178,
+      frameHeight: 250,
       spacing: 2,
-      margin: 2
-    });
-    this.load.spritesheet("cards_thin", "assets/sprites/cards_thin.png", {
-      frameWidth: 130,
-      frameHeight: 202,
-      spacing: 2,
-      margin: 1
-    });
-    this.load.spritesheet("cards_pixeldark", "assets/sprites/cards_pixeldark.png", {
-      frameWidth: 113,
-      frameHeight: 158,
-      spacing: 1,
-      margin: 1
-    });
-    this.load.spritesheet("cards_windows7", "assets/sprites/cards_windows7.png", {
-      frameWidth: 73,
-      frameHeight: 98,
-      spacing: 0,
       margin: 0
     });
     this.load.image('blank', 'assets/sprites/blank.png');

@@ -42,21 +42,15 @@ var filesToCache = [
 
   '/assets/sprites/icons.png',
 
+  '/assets/sprites/cards_civ.png',
   '/assets/sprites/cards_largeindex.png',
+  '/assets/sprites/cards_minimal.png',
   '/assets/sprites/cards_modern.png',
   '/assets/sprites/cards_sixties_2.png',
 
 
 
-  '/assets/sprites/cards_apollo.png',
-  '/assets/sprites/cards_civ.png',
-  '/assets/sprites/cards_classic.png',
-  '/assets/sprites/cards_draw.png',
-  '/assets/sprites/cards_minimal.png',
-  '/assets/sprites/cards_mobile.png',
-  '/assets/sprites/cards_thin.png',
-  '/assets/sprites/cards_pixeldark.png',
-  '/assets/sprites/cards_windows7.png',
+
 
   '/assets/sprites/backs.png',
 

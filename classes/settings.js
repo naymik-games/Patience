@@ -32,42 +32,18 @@ let decks = [
     key: 'cards_sixty_2',
     name: 'Sixties'
   },
-  {
-    key: 'cards_apollo',
-    name: 'Apollo'
-  },
+
   {
     key: 'cards_civ',
     name: 'Civilization'
   },
   {
-    key: 'cards_classic',
-    name: 'Classic'
-  },
-  {
-    key: 'cards_draw',
-    name: 'Draw'
-  },
-  {
     key: 'cards_minimal',
     name: 'Minimal'
   },
-  {
-    key: 'cards_mobile',
-    name: 'Mobile'
-  },
-  {
-    key: 'cards_thin',
-    name: 'Thin'
-  },
-  {
-    key: 'cards_pixeldark',
-    name: 'Pixel Dark'
-  },
-  {
-    key: 'cards_windows7',
-    name: 'Windows 7'
-  }
+
+
+
 ]
 let onGame = 1
 let games = [
